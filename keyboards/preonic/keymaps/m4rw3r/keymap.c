@@ -35,6 +35,11 @@ enum preonic_keycodes {
   BACKLIT
 };
 
+#ifdef AUDIO_ENABLE
+float game_on_song[][2]  = SONG(ONE_UP_SOUND);
+float game_off_song[][2] = SONG(TERMINAL_SOUND);
+#endif
+
 /**
  * Modifications vs the default Preonic layout:
  * 
@@ -44,6 +49,8 @@ enum preonic_keycodes {
 
 // TODO: Gaming layers
 // TODO: Numeric keypad
+// TODO: HJKL with modifier?
+// TODO: Caps lock on non-gaming layer? Or reset caps lock on leaving?
 // TODO: Make sure it matches planck too
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -58,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | GUI  | Alt  | Brite|Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * | Ctrl | GUI  |Brite | Alt  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_preonic_grid( \
@@ -73,10 +80,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * * Caps Lock replaces ESC, used for push-to-talk in voice
  */
 [_GAME] = LAYOUT_preonic_grid( \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
-  KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
@@ -87,10 +94,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * * Same mapping as standard LOWER for right side of the keyboard to faciltate typing
  */
 [_LOWER_GAME] = LAYOUT_preonic_grid( \
-  KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______  \
-  _______, _______, _______, _______, _______, _______, _______, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______, \
+  KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11, \
+  _______, _______, _______, _______, _______, _______, _______, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_F12, \
   _______, _______, _______, _______, _______, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
@@ -140,11 +147,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * TODO: Is this even useful? Especially if it is only a clone of the normal Raise layer?
  */
 [_RAISE_GAME] = LAYOUT_preonic_grid( \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY  \
 ),
 
 /* Adjust (Lower + Raise)
@@ -172,6 +179,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  int main_layer;
+  int alt_layer;
+
   switch (keycode) {
   case QWERTY:
     if (record->event.pressed) {
@@ -182,13 +192,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case GAME:
     if (record->event.pressed) {
       layer_invert(_GAME);
+      #ifdef AUDIO_ENABLE
+      if(IS_LAYER_ON(_GAME)) {
+        PLAY_SONG(game_on_song);
+      }
+      else {
+        PLAY_SONG(game_off_song);
+      }
+      #endif
     }
     return false;
     break;
   case LOWER:
   case RAISE:
-    int main_layer = keycode == RAISE ? _RAISE : _LOWER;
-    int alt_layer  = keycode == RAISE ? _RAISE_GAME : _LOWER_GAME;
+    main_layer = keycode == RAISE ? _RAISE : _LOWER;
+    alt_layer  = keycode == RAISE ? _RAISE_GAME : _LOWER_GAME;
 
     if(IS_LAYER_ON(_GAME)) {
       // Swap to game layer as primary
