@@ -20,6 +20,7 @@
 enum preonic_layers {
   _QWERTY,
   _GAME,
+  _KEYPAD,
   _LOWER_GAME,
   _LOWER,
   _RAISE,
@@ -30,6 +31,7 @@ enum preonic_layers {
 enum preonic_keycodes {
   QWERTY = SAFE_RANGE,
   GAME,
+  KEYPAD,
   LOWER,
   RAISE,
   BACKLIT
@@ -47,7 +49,6 @@ float game_off_song[][2] = SONG(TERMINAL_SOUND);
  * - Swapped GUI and Alt to mimic standard Windows keyboard
  */
 
-// TODO: Gaming layers
 // TODO: Numeric keypad
 // TODO: HJKL with modifier?
 // TODO: Support for Swedish layout (something remapping modifiers producing the same output as US)
@@ -87,6 +88,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
+/* Keypad layer
+ */
+[_KEYPAD] = LAYOUT_preonic_grid( \
+  _______, _______, _______, _______, _______, _______, KC_PSLS, KC_PAST, KC_PMNS, _______, _______, _______, \
+  _______, _______, _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, KC_PPLS, _______, _______, _______, \
+  _______, _______, _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_KENT, _______, _______, _______, \
+  _______, _______, _______, _______, _______, KC_KP_1, KC_KP_2, KC_KP_3, KC_PDOT, _______, _______, _______, \
+  _______, _______, _______, _______, _______, KC_KP_0, KC_KP_0, _______, _______, _______, _______, _______  \
+),
+
 /* Gaming lower layer, main modifier layer, one-handed for gaming-actions.
  * 
  * * ESC on Grave, since Caps Lock replaced ESC on base layer
@@ -118,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR,   KC_LPRN, KC_RPRN, _______, \
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR,   KC_LPRN, KC_RPRN, _______, \
   KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_UNDS, KC_PLUS,   KC_LCBR, KC_RCBR, KC_PIPE, \
-  _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,S(KC_NUHS),S(KC_NUBS),KC_HOME, KC_END, _______, \
+  _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,S(KC_NUHS),S(KC_NUBS),KC_HOME, KC_END,  _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT,   KC_VOLD, KC_VOLU, KC_MPLY \
 ),
 
@@ -150,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______, KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY  \
 ),
 
