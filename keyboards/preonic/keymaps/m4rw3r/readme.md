@@ -3,14 +3,14 @@
 ## Features
 
  * Should be Planck compatible
- * Gaming mode, where base-keys are not modified and modifiers are easily
-   applied to number keys with the left hand only
+ * Gaming modey
  * Numpad, one-handed
 
 ### Gaming Mode
 
  * Caps Lock easily accessible for Push-To-Talk
  * LOWER layer does not override letters on the left hand side of the keyboard
+ * LOWER enables use of F-keys on the number keys
 
 ## Modifications on the QWERTY layer
 
