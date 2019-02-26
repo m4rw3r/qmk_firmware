@@ -50,7 +50,6 @@ float game_off_song[][2] = SONG(TERMINAL_SOUND);
 // TODO: Gaming layers
 // TODO: Numeric keypad
 // TODO: HJKL with modifier?
-// TODO: Caps lock on non-gaming layer? Or reset caps lock on leaving?
 // TODO: Support for Swedish layout (something remapping modifiers producing the same output as US)
 // TODO: Make sure it matches planck too
 
@@ -176,28 +175,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 )
 
-
 };
 
 void tap_keycode(uint16_t keycode) {
-    register_code(keycode);
-    unregister_code(keycode);
+  register_code(keycode);
+  unregister_code(keycode);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   int main_layer;
   int alt_layer;
 
-  switch (keycode) {
+  switch(keycode) {
   case QWERTY:
-    if (record->event.pressed) {
+    if(record->event.pressed) {
       set_single_persistent_default_layer(_QWERTY);
     }
+
     return false;
-    break;
   case GAME:
-    if (record->event.pressed) {
+    if(record->event.pressed) {
       layer_invert(_GAME);
+
       #ifdef AUDIO_ENABLE
       if(IS_LAYER_ON(_GAME)) {
         PLAY_SONG(game_on_song);
@@ -212,8 +211,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_keycode(KC_CAPS);
       }
     }
+
     return false;
-    break;
   case LOWER:
   case RAISE:
     main_layer = keycode == RAISE ? _RAISE : _LOWER;
@@ -226,10 +225,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       alt_layer  = tmp;
     }
 
-    if (record->event.pressed) {
+    if(record->event.pressed) {
       layer_on(main_layer);
       layer_off(alt_layer);
-    } else {
+    }
+    else {
+      // Turn off both just in case
       layer_off(main_layer);
       layer_off(alt_layer);
     }
@@ -238,10 +239,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       IS_LAYER_ON(_GAME) ? _LOWER_GAME : _LOWER,
       IS_LAYER_ON(_GAME) ? _RAISE_GAME : _RAISE,
       _ADJUST);
+
     return false;
-    break;
   case BACKLIT:
-    if (record->event.pressed) {
+    if(record->event.pressed) {
       register_code(KC_RSFT);
       #ifdef BACKLIGHT_ENABLE
         backlight_step();
@@ -249,15 +250,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       #ifdef __AVR__
       PORTE &= ~(1<<6);
       #endif
-    } else {
+    }
+    else {
       unregister_code(KC_RSFT);
       #ifdef __AVR__
       PORTE |= (1<<6);
       #endif
     }
+
     return false;
-    break;
   }
+
   return true;
 };
 
