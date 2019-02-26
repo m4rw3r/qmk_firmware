@@ -51,6 +51,7 @@ float game_off_song[][2] = SONG(TERMINAL_SOUND);
 // TODO: Numeric keypad
 // TODO: HJKL with modifier?
 // TODO: Caps lock on non-gaming layer? Or reset caps lock on leaving?
+// TODO: Support for Swedish layout (something remapping modifiers producing the same output as US)
 // TODO: Make sure it matches planck too
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -178,6 +179,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
+void tap_keycode(uint16_t keycode) {
+    register_code(keycode);
+    unregister_code(keycode);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   int main_layer;
   int alt_layer;
@@ -200,6 +206,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         PLAY_SONG(game_off_song);
       }
       #endif
+
+      // Turn off Caps if we are leaving _GAME
+      if( ! IS_LAYER_ON(_GAME) && host_keyboard_leds() & (1 << USB_LED_CAPS_LOCK)) {
+        tap_keycode(KC_CAPS);
+      }
     }
     return false;
     break;
