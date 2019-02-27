@@ -16,3 +16,9 @@
 
  * Moved `Ctrl`, `GUI`, `Alt` cluster one key to the left
  * Swapped `GUI` and `Alt` to keep them in standard order
+ * Readded the backspace key to the same position as on the planck
+
+## Modifications on the RAISE layer
+
+ * F-keys are removed
+ * Added ÅÄÖ€
