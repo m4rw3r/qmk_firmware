@@ -211,15 +211,15 @@ char *alt_seq_mac[][2] = {
   },
   {
     SS_LALT(SS_TAP(X_U))SS_TAP(X_A), // Alt+u + a → ä
-    SS_LSFT(SS_LALT(SS_TAP(X_U))SS_TAP(X_A)), // Alt+u + A → Ä
+    SS_LALT(SS_TAP(X_U))SS_LSFT(SS_TAP(X_A)), // Alt+u + A → Ä
   },
   {
     SS_LALT(SS_TAP(X_U))SS_TAP(X_O), // Alt+u + o → ö
-    SS_LSFT(SS_LALT(SS_TAP(X_U))SS_TAP(X_O)), // Alt+u + O → Ö
+    SS_LALT(SS_TAP(X_U))SS_LSFT(SS_TAP(X_O)), // Alt+u + O → Ö
   },
   {
     SS_LALT(SS_LSFT(SS_TAP(X_2))), // Alt+Shift+2 → €
-    SS_LSFT(SS_TAP(X_2)), // Alt+Shift+2 → €, Shift already pressed
+    SS_LALT(SS_LSFT(SS_TAP(X_2))), // Alt+Shift+2 → €
   },
 };
 
