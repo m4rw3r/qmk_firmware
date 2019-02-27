@@ -24,7 +24,6 @@ enum preonic_layers {
   _LOWER_GAME,
   _LOWER,
   _RAISE,
-  _RAISE_GAME,
   _ADJUST
 };
 
@@ -34,13 +33,20 @@ enum preonic_keycodes {
   KEYPAD,
   LOWER,
   RAISE,
-  BACKLIT
+  BACKLIT,
+  KX_AA,
+  KX_AE,
+  KX_OE,
+  KX_EURO,
 };
 
 #ifdef AUDIO_ENABLE
 float game_on_song[][2]  = SONG(ONE_UP_SOUND);
 float game_off_song[][2] = SONG(TERMINAL_SOUND);
 #endif
+
+// Bootmagic config so we can check the WIN/ALT swap and determine how to send latin1 keys
+extern keymap_config_t keymap_config;
 
 /**
  * Modifications vs the default Preonic layout:
@@ -51,6 +57,8 @@ float game_off_song[][2] = SONG(TERMINAL_SOUND);
 
 // TODO: Numeric keypad
 // TODO: HJKL with modifier?
+// TODO: What to put on the brightness key?
+// TODO: Use a mouse-key instead of caps?
 // TODO: Support for Swedish layout (something remapping modifiers producing the same output as US)
 // TODO: Make sure it matches planck too
 
@@ -71,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_QWERTY] = LAYOUT_preonic_grid( \
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
-  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,  \
+  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
   KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,  \
   KC_LCTL, KC_LGUI, BACKLIT, KC_LALT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
@@ -93,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_KEYPAD] = LAYOUT_preonic_grid( \
   _______, _______, _______, _______, _______, _______, KC_PSLS, KC_PAST, KC_PMNS, _______, _______, _______, \
   _______, _______, _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, KC_PPLS, _______, _______, _______, \
-  _______, _______, _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_KENT, _______, _______, _______, \
+  _______, _______, _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_PENT, _______, _______, _______, \
   _______, _______, _______, _______, _______, KC_KP_1, KC_KP_2, KC_KP_3, KC_PDOT, _______, _______, _______, \
   _______, _______, _______, _______, _______, KC_KP_0, KC_KP_0, _______, _______, _______, _______, _______  \
 ),
@@ -111,7 +119,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
-
 /* Lower
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
@@ -139,9 +146,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   -  |   =  |   [  |   ]  |  \   |
+ * | Del  |   Å  |   Ä  |   Ö  |      |      |      |   -  |   =  |   [  |   ]  |  \   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO # |ISO / |      |      |      |
+ * |      |      |      |   €  |      |      |      |ISO # |ISO / |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
@@ -149,19 +156,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = LAYOUT_preonic_grid( \
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,  \
-  KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
-  _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY  \
-),
-/* Gaming raise layer
- *
- * TODO: Is this even useful? Especially if it is only a clone of the normal Raise layer?
- */
-[_RAISE_GAME] = LAYOUT_preonic_grid( \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
-  _______, _______, _______, _______, _______, _______, _______, KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______, \
+  KC_DEL,  KX_AA,   KX_AE,   KX_OE,   _______, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
+  _______, _______, _______, KX_EURO, _______, _______, _______, KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY  \
 ),
 
@@ -186,6 +182,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 )
 
+};
+
+/* Alt codes for windows */
+char *alt_seq_win[][2] = {
+  {
+    SS_LALT(SS_TAP(X_KP_0)SS_TAP(X_KP_2)SS_TAP(X_KP_2)SS_TAP(X_KP_9)), // Alt+0229 → å
+    SS_LALT(SS_TAP(X_KP_0)SS_TAP(X_KP_1)SS_TAP(X_KP_9)SS_TAP(X_KP_7)), // Alt+0197 → Å
+  },
+  {
+    SS_LALT(SS_TAP(X_KP_0)SS_TAP(X_KP_2)SS_TAP(X_KP_2)SS_TAP(X_KP_8)), // Alt+0228 → ä
+    SS_LALT(SS_TAP(X_KP_0)SS_TAP(X_KP_1)SS_TAP(X_KP_9)SS_TAP(X_KP_6)), // Alt+0196 → Ä
+  },
+  {
+    SS_LALT(SS_TAP(X_KP_0)SS_TAP(X_KP_2)SS_TAP(X_KP_4)SS_TAP(X_KP_6)), // Alt+0246 → ö
+    SS_LALT(SS_TAP(X_KP_0)SS_TAP(X_KP_2)SS_TAP(X_KP_1)SS_TAP(X_KP_4)), // Alt+0214 → Ö
+  },
+  {
+    SS_LALT(SS_TAP(X_KP_0)SS_TAP(X_KP_1)SS_TAP(X_KP_2)SS_TAP(X_KP_8)), // Alt+0128 → €
+    SS_LALT(SS_TAP(X_KP_0)SS_TAP(X_KP_1)SS_TAP(X_KP_2)SS_TAP(X_KP_8)), // Alt+0128 → €
+  },
+};
+
+char *alt_seq_mac[][2] = {
+  {
+    SS_LALT(SS_TAP(X_A)), // Alt+a → å
+    SS_LSFT(SS_LALT(SS_TAP(X_A))), // Alt+A → Å
+  },
+  {
+    SS_LALT(SS_TAP(X_U))SS_TAP(X_A), // Alt+u + a → ä
+    SS_LSFT(SS_LALT(SS_TAP(X_U))SS_TAP(X_A)), // Alt+u + A → Ä
+  },
+  {
+    SS_LALT(SS_TAP(X_U))SS_TAP(X_O), // Alt+u + o → ö
+    SS_LSFT(SS_LALT(SS_TAP(X_U))SS_TAP(X_O)), // Alt+u + O → Ö
+  },
+  {
+    SS_LALT(SS_LSFT(SS_TAP(X_2))), // Alt+Shift+2 → €
+    SS_LSFT(SS_TAP(X_2)), // Alt+Shift+2 → €, Shift already pressed
+  },
 };
 
 void tap_keycode(uint16_t keycode) {
@@ -227,7 +262,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case LOWER:
   case RAISE:
     main_layer = keycode == RAISE ? _RAISE : _LOWER;
-    alt_layer  = keycode == RAISE ? _RAISE_GAME : _LOWER_GAME;
+    // There is no _RAISE_GAME
+    alt_layer  = keycode == RAISE ? _RAISE : _LOWER_GAME;
 
     if(IS_LAYER_ON(_GAME)) {
       // Swap to game layer as primary
@@ -238,7 +274,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     if(record->event.pressed) {
       layer_on(main_layer);
-      layer_off(alt_layer);
+
+      if(main_layer != alt_layer) {
+        layer_off(alt_layer);
+      }
     }
     else {
       // Turn off both just in case
@@ -248,10 +287,42 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     update_tri_layer(
       IS_LAYER_ON(_GAME) ? _LOWER_GAME : _LOWER,
-      IS_LAYER_ON(_GAME) ? _RAISE_GAME : _RAISE,
+      _RAISE,
       _ADJUST);
 
     return false;
+
+  // UNICODE-ish
+  case KX_AA:
+  case KX_AE:
+  case KX_OE:
+  case KX_EURO:
+  {
+    if( ! record->event.pressed) {
+      return false;
+    }
+
+    uint16_t index = keycode - KX_AA;
+    uint8_t  shift = get_mods() & MOD_MASK_SHIFT;
+
+    unregister_code(KC_LSFT); // Temporarily disable both shift keys
+    unregister_code(KC_RSFT);
+
+    // If we have swapped left alt and gui we are on a mac
+    if(keymap_config.swap_lalt_lgui) {
+      send_string(alt_seq_mac[index][(bool)shift]);
+    }
+    else {
+      // Choose Alt code based on which key was pressed and whether Shift was held.
+      send_string(alt_seq_win[index][(bool)shift]);
+    }
+    
+    // Restore shift keys to previous state
+    if(shift & MOD_BIT(KC_LSFT)) { register_code(KC_LSFT); }
+    if(shift & MOD_BIT(KC_RSFT)) { register_code(KC_RSFT); }
+    
+    return false;
+  }
   case BACKLIT:
     if(record->event.pressed) {
       register_code(KC_RSFT);
