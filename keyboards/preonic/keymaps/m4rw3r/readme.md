@@ -18,6 +18,11 @@
  * Swapped `GUI` and `Alt` to keep them in standard order
  * Readded the backspace key to the same position as on the planck
 
+## Modifications on the LOWER layer
+
+ * Made arrow keys Home, Page Down, Page Up and End
+ * Added Print Screen on .
+
 ## Modifications on the RAISE layer
 
  * F-keys are removed
