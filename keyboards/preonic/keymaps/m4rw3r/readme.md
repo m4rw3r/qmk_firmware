@@ -14,6 +14,12 @@ A mode for use with the left hand, providing an alternate LOWER layer.
  * LOWER layer does not override letters on the left hand side of the keyboard
  * LOWER enables use of F-keys on the number keys
 
+## Building
+
+```sh
+make preonic/rev3:m4rw3r:dfu-util
+```
+
 ## Modifications compared to standard Preonic/Planck
 
 ## Base layers
