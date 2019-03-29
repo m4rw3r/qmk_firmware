@@ -42,7 +42,9 @@ enum preonic_keycodes {
 
 #ifdef AUDIO_ENABLE
 float game_on_song[][2]  = SONG(ONE_UP_SOUND);
-float game_off_song[][2] = SONG(TERMINAL_SOUND);
+float game_off_song[][2] = SONG(COIN_SOUND);
+float keypad_on_song[][2]  = SONG(NUM_LOCK_ON_SOUND);
+float keypad_off_song[][2] = SONG(NUM_LOCK_OFF_SOUND);
 #endif
 
 // Bootmagic config so we can check the WIN/ALT swap and determine how to send latin1 keys
@@ -55,7 +57,6 @@ extern keymap_config_t keymap_config;
  * - Swapped GUI and Alt to mimic standard Windows keyboard
  */
 
-// TODO: Numeric keypad
 // TODO: HJKL with modifier?
 // TODO: What to put on the brightness key?
 // TODO: Use a mouse-key instead of caps?
@@ -79,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_preonic_grid( \
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,  \
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
   KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,  \
@@ -88,7 +89,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Gaming overrides
  *
  * * Caps Lock replaces ESC, used for push-to-talk in voice
- * * Move alt one to the left to make it difficult to press alt + LOWER + 4 (aka alt + F4)
  */
 [_GAME] = LAYOUT_preonic_grid( \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
@@ -101,11 +101,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keypad layer
  */
 [_KEYPAD] = LAYOUT_preonic_grid( \
-  _______, _______, _______, _______, _______, _______, KC_PSLS, KC_PAST, KC_PMNS, _______, _______, _______, \
-  _______, _______, _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, KC_PPLS, _______, _______, _______, \
-  _______, _______, _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_PENT, _______, _______, _______, \
-  _______, _______, _______, _______, _______, KC_KP_1, KC_KP_2, KC_KP_3, KC_PDOT, _______, _______, _______, \
-  _______, _______, _______, _______, _______, KC_KP_0, KC_KP_0, _______, _______, _______, _______, _______  \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PSLS, KC_PAST, KC_PMNS, \
+  _______, _______, _______, _______, _______, _______, _______, KC_PAST, KC_KP_7, KC_KP_8, KC_KP_9, KC_PMNS, \
+  _______, _______, _______, _______, _______, _______, _______, KC_PSLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, \
+  _______, _______, _______, _______, _______, _______, _______, _______, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, \
+  _______, _______, _______, _______, _______, _______, _______, _______, KC_KP_0, KC_KP_0, KC_PDOT, _______ \
 ),
 
 /* Gaming lower layer, main modifier layer, one-handed for gaming-actions.
@@ -120,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_F12, \
   _______, _______, _______, _______, _______, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PSCR, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
+  _______, _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
 ),
 /* Lower
  * ,-----------------------------------------------------------------------------------.
@@ -132,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO ~ |ISO | | PScr |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Home | PgDn | PgUp | End  |
+ * |      |      |      |      |      |     Bksp    |      | Home | PgDn | PgUp | End  |
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_preonic_grid( \
@@ -140,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR,   KC_LPRN, KC_RPRN, _______, \
   KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_UNDS, KC_PLUS,   KC_LCBR, KC_RCBR, KC_PIPE, \
   _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,S(KC_NUHS),S(KC_NUBS),KC_PSCR, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME,   KC_PGDN, KC_PGUP, KC_END   \
+  _______, _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, KC_HOME,   KC_PGDN, KC_PGUP, KC_END   \
 ),
 
 /* Raise
@@ -157,7 +157,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_preonic_grid( \
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,  \
   KC_DEL,  KX_AA,   KX_AE,   KX_OE,   _______, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
   _______, _______, _______, KX_EURO, _______, _______, _______, KC_NUHS, KC_NUBS, _______, _______, _______, \
@@ -180,8 +180,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_preonic_grid( \
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
   _______, RESET,   DEBUG,   _______, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL,  \
-  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,     GAME, _______,  _______, _______, \
-  _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______, \
+  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,     GAME, _______, _______, _______, \
+  _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, KEYPAD,  _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 )
 
@@ -258,6 +258,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // Turn off Caps if we are leaving _GAME
       if( ! IS_LAYER_ON(_GAME) && host_keyboard_leds() & (1 << USB_LED_CAPS_LOCK)) {
         tap_keycode(KC_CAPS);
+      }
+    }
+
+    return false;
+  case KEYPAD:
+    if(record->event.pressed) {
+      layer_invert(_KEYPAD);
+
+      #ifdef AUDIO_ENABLE
+      if(IS_LAYER_ON(_KEYPAD)) {
+        PLAY_SONG(keypad_on_song);
+      }
+      else {
+        PLAY_SONG(keypad_off_song);
+      }
+      #endif
+
+      // Turn on Num Lock if we are entering the keypad
+      if(IS_LAYER_ON(_KEYPAD) && host_keyboard_leds() & (1 << USB_LED_NUM_LOCK)) {
+        tap_keycode(KC_NLCK);
       }
     }
 
