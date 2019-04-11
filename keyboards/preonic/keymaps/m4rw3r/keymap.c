@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_KEYPAD] = LAYOUT_preonic_grid( \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PSLS, KC_PAST, _______, \
-  _______, _______, _______, _______, _______, _______, _______, KC_PAST, KC_KP_7, KC_KP_8, KC_KP_9, KC_BSPC, \
+  _______, _______, _______, _______, _______, _______, _______, KC_PAST, KC_KP_7, KC_KP_8, KC_KP_9, _______, \
   _______, _______, _______, _______, _______, _______, _______, KC_PSLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, \
   _______, _______, _______, _______, _______, _______, _______, KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, \
   _______, _______, _______, _______, _______, _______, _______, _______, KC_KP_0, KC_PDOT, XXXXXXX, XXXXXXX  \
@@ -120,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_F12, \
   _______, _______, _______, _______, _______, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PSCR, _______, _______, \
-  _______, _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
+  _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
 ),
 /* Lower
  * ,-----------------------------------------------------------------------------------.
@@ -140,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR,   KC_LPRN, KC_RPRN, _______, \
   KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_UNDS, KC_PLUS,   KC_LCBR, KC_RCBR, KC_PIPE, \
   _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,S(KC_NUHS),S(KC_NUBS),KC_PSCR, _______, _______, \
-  _______, _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, KC_HOME,   KC_PGDN, KC_PGUP, KC_END   \
+  _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME,   KC_PGDN, KC_PGUP, KC_END   \
 ),
 
 /* Raise
