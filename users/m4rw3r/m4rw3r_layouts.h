@@ -101,7 +101,7 @@
  * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
-#define M_RAISE_R1 M_GRID_R2
+#define M_RAISE_R1 M_RAISE_R2
 #define M_RAISE_R2 KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______
 #define M_RAISE_R3 KC_DEL,  KX_AA,   KX_AE,   KX_OE,   _______, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS
 #define M_RAISE_R4 _______, _______, _______, KX_EURO, _______, _______, _______, KC_NUHS, KC_NUBS, _______, _______, _______
