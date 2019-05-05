@@ -49,10 +49,18 @@ void tap_keycode(uint16_t keycode) {
 
 // TODO: void keyboard_post_init_user(void), init leds in this
 
+uint32_t update_tri_layer_state_alt(uint32_t state, uint8_t layer1, uint32_t layer1_alt, uint8_t layer2, uint8_t layer3) {
+  uint32_t mask12 = (1UL << layer1) | (1UL << layer2);
+  uint32_t mask12_alt = (1UL << layer1_alt) | (1UL << layer2);
+  uint32_t mask3 = 1UL << layer3;
+  return ((state & mask12) == mask12 || (state & mask12_alt) == mask12_alt) ? (state | mask3) : (state & ~mask3);
+}
+
 uint32_t layer_state_set_user(uint32_t state) {
-  state = update_tri_layer_state(
+  // Custom version of update_tri_layer_state to allow for deactivation while old state is held
+  state = update_tri_layer_state_alt(
     state,
-    IS_LAYER_STATE_ON(state, _GAME) ? _GAME_LOWER : _LOWER,
+    _LOWER, _GAME_LOWER,
     _RAISE,
     _ADJUST);
 
@@ -70,7 +78,6 @@ uint32_t layer_state_set_user(uint32_t state) {
   #endif
 
   // TODO: RGB
-  // TODO: Sound
 
   return layer_state_set_keymap(state);
 }
