@@ -31,7 +31,7 @@ enum userspace_layers {
 #define IS_LAYER_STATE_DEACTIVATING(state, layer) IS_LAYER_ON(layer) && IS_LAYER_STATE_OFF(state, layer)
 
 #define LAYER_STATE_ACTIVATING(state) (layer_state ^ (state)) & (state)
-#define LAYER_STATE_DEACTIVATING(state) (layer_state ^ (state)) & layer_state
+#define LAYER_STATE_DEACTIVATING(state) (layer_state ^ (state)) & ~(state)
 
 // Keymap version of process records, default to return true
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record);

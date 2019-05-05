@@ -12,5 +12,5 @@ make preonic/rev3:m4rw3r:dfu-util
 #### NIU Mini
 
 ```bash
-make niu_mini:m4rw3r:avrdude
+make niu_mini:m4rw3r:dfu
 ```
