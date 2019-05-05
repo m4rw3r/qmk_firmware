@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_LOWER] = LAYOUT_preonic_grid_wrapper(M_LOWER_R1, M_LOWER_R2, M_LOWER_R3, M_LOWER_R4, M_LOWER_R5),
-[_RAISE] = LAYOUT_preonic_grid_wrapper(M_LOWER_R1, M_LOWER_R2, M_LOWER_R3, M_LOWER_R4, M_LOWER_R5),
+[_RAISE] = LAYOUT_preonic_grid_wrapper(M_RAISE_R1, M_RAISE_R2, M_RAISE_R3, M_RAISE_R4, M_RAISE_R5),
 
 /* Adjust (Lower + Raise)
  * ,-----------------------------------------------------------------------------------.
