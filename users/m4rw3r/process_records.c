@@ -1,7 +1,7 @@
 #include "process_records.h"
 
 // Bootmagic config so we can check the WIN/ALT swap and determine how to send latin1 keys
-extern keymap_config_t keymap_config;
+extern user_config_t user_config;
 
 /* Alt codes for windows */
 char *alt_seq_win[][2] = {
@@ -42,27 +42,15 @@ char *alt_seq_mac[][2] = {
   },
 };
 
-void tap_keycode(uint16_t keycode) {
-  register_code(keycode);
-  unregister_code(keycode);
-}
-
-// TODO: void keyboard_post_init_user(void), init leds in this
-
-uint32_t update_tri_layer_state_alt(uint32_t state, uint8_t layer1, uint32_t layer1_alt, uint8_t layer2, uint8_t layer3) {
-  uint32_t mask12 = (1UL << layer1) | (1UL << layer2);
-  uint32_t mask12_alt = (1UL << layer1_alt) | (1UL << layer2);
-  uint32_t mask3 = 1UL << layer3;
-  return ((state & mask12) == mask12 || (state & mask12_alt) == mask12_alt) ? (state | mask3) : (state & ~mask3);
-}
+// TODO: default_layer_state_set_user(state)
 
 uint32_t layer_state_set_user(uint32_t state) {
   // Custom version of update_tri_layer_state to allow for deactivation while old state is held
-  state = update_tri_layer_state_alt(
+  state = update_tri_layer_states(
     state,
-    _LOWER, _GAME_LOWER,
-    _RAISE,
-    _ADJUST);
+    LAYER_MASK(_LOWER) | LAYER_MASK(_GAME_LOWER),
+    LAYER_MASK(_RAISE),
+    LAYER_MASK(_ADJUST));
 
   // Turn off Caps if we are leaving _GAME
   if(IS_LAYER_STATE_DEACTIVATING(state, _GAME) && IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
@@ -74,10 +62,14 @@ uint32_t layer_state_set_user(uint32_t state) {
   }
 
   #ifdef AUDIO_ENABLE
-  layer_state_play_audio(state);
+  layer_state_set_audio(state);
   #endif
 
-  // TODO: RGB
+  #ifdef RGBLIGHT_ENABLE
+  if(user_config.use_rgb_layer_indicators) {
+    layer_state_set_rgb(state);
+  }
+  #endif
 
   return layer_state_set_keymap(state);
 }
@@ -86,7 +78,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {
   case KC_QWERTY ... KC_DVORAK:
     if(record->event.pressed) {
+      // TODO: Use user-version of layer-toggle? or does mac persist since it is enabled
       set_single_persistent_default_layer(keycode - KC_QWERTY);
+    }
+
+    return false;
+  case KC_MAC_ON:
+    if(record->event.pressed) {
+      set_mac_layer(true);
+    }
+
+    return false;
+
+  case KC_MAC_OFF:
+    if(record->event.pressed) {
+      set_mac_layer(false);
     }
 
     return false;
@@ -107,8 +113,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     unregister_code(KC_LSFT); // Temporarily disable both shift keys
     unregister_code(KC_RSFT);
 
-    // If we have swapped left alt and gui we are on a mac
-    if(keymap_config.swap_lalt_lgui) {
+    // If we have mac-mode on, use mac sequences
+    if(user_config.is_mac) {
       send_string(alt_seq_mac[index][(bool)shift]);
     }
     else {
@@ -122,24 +128,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     
     return false;
   }
+
   case KC_BACKLIT:
     if(record->event.pressed) {
-      register_code(KC_RSFT);
       #ifdef BACKLIGHT_ENABLE
         backlight_step();
-      #endif
-      #ifdef __AVR__
-      PORTE &= ~(1<<6);
-      #endif
-    }
-    else {
-      unregister_code(KC_RSFT);
-      #ifdef __AVR__
-      PORTE |= (1<<6);
       #endif
     }
 
     return false;
+
+  case KC_RGB_LAYER_INDICATORS:
+    if(record->event.pressed) {
+      set_rgb_layer_indicators(true);
+    }
+
+    return false;
+
+  // For any of the RGB codes (see quantum_keycodes.h)
+  case RGB_MODE_FORWARD ... RGB_MODE_GRADIENT:
+    if(record->event.pressed) {
+      set_rgb_layer_indicators(false);
+    }
+
+    // Keep processing, we want these RGB changes to take effect
+    return true;
   }
 
   return process_record_keymap(keycode, record);

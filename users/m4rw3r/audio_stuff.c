@@ -5,7 +5,7 @@ float game_off_song[][2] = SONG(COIN_SOUND);
 float keypad_on_song[][2]  = SONG(NUM_LOCK_ON_SOUND);
 float keypad_off_song[][2] = SONG(NUM_LOCK_OFF_SOUND);
 
-void layer_state_play_audio(uint32_t state) {
+void layer_state_set_audio(uint32_t state) {
   switch(biton32(LAYER_STATE_ACTIVATING(state))) {
   case _GAME:
     return PLAY_SONG(game_on_song);

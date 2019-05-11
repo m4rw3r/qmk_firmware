@@ -13,11 +13,14 @@ enum userspace_custom_keycodes {
   KC_QWERTY = USERSPACE_SAFE_RANGE,
   KC_COLEMAK,
   KC_DVORAK,
+  KC_MAC_OFF,
+  KC_MAC_ON,
+  KC_BACKLIT,
+  KC_RGB_LAYER_INDICATORS,
   // KC_GAME,
   // KC_KEYPAD,
   // KC_LOWER,
   // KC_RAISE,
-  KC_BACKLIT,
   KX_AA,
   KX_AE,
   KX_OE,
@@ -28,6 +31,10 @@ enum userspace_custom_keycodes {
 #define COLEMAK KC_COLEMAK
 #define DVORAK  KC_COLEMAK
 #define BACKLIT KC_BACKLIT
+// Toggles Mac-layout layer
+#define MAC_ON  KC_MAC_ON
+#define MAC_OFF KC_MAC_OFF
+#define RGBLAYER KC_RGB_LAYER_INDICATORS
 
 #define KEYPAD  TG(_KEYPAD)
 #define GAME    TG(_GAME)
@@ -35,6 +42,7 @@ enum userspace_custom_keycodes {
 #define G_LOWER MO(_GAME_LOWER)
 #define RAISE   MO(_RAISE)
 
+#define CTL_ESC LCTL_T(KC_ESC)
 #define BK_LWER LT(_LOWER, KC_BSPC)
 #define SP_LWER LT(_LOWER, KC_SPC)
 
