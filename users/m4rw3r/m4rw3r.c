@@ -32,9 +32,7 @@ void keyboard_post_init_user(void) {
   }
 
   #ifdef RGBLIGHT_ENABLE
-  if(user_config.use_rgb_layer_indicators) {
-    layer_state_set_rgb(layer_state);
-  }
+  layer_state_set_rgb(layer_state);
   #endif
 
   keyboard_post_init_keymap();
@@ -83,6 +81,7 @@ void set_rgb_layer_indicators(bool enabled) {
 
     #ifdef RGBLIGHT_ENABLE
     if(user_config.use_rgb_layer_indicators) {
+      rgblight_enable();
       layer_state_set_rgb(layer_state);
     }
     #endif
