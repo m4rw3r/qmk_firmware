@@ -29,14 +29,24 @@
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | GUI  |Brite | Alt  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * | Ctrl | GUI  | Alt  |Brite |Lower |    Space    |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
+ * 
+ * On MAC the last row is swapped to:
+ * 
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Ctrl |Brite | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * `-----------------------------------------------------------------------------------'
+ * 
+ * Using the MAC_ON and MAC_OFF keycodes
  */
+
+#define M_TRANSPA     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 
 // Some basic modifiers independent of basic layout
 #define M_BASE_R1(a, b, c, d, e, f, g, h, i, j)    KC_GRV,  a, b, c, d, e, f, g, h, i, j, KC_DEL
 #define M_BASE_R2(q, w, e, r, t, y, u, i, o, p)    KC_TAB,  q, w, e, r, t, y, u, i, o, p, KC_BSPC
-#define M_BASE_R3(a, s, d, f, g, h, j, k, l, q, w) KC_ESC,  a, s, d, f, g, h, j, k, l, q, w
+#define M_BASE_R3(a, s, d, f, g, h, j, k, l, q, w) CTL_ESC, a, s, d, f, g, h, j, k, l, q, w
 #define M_BASE_R4(z, x, c, v, b, n, m, q, w, e)    KC_LSFT, z, x, c, v, b, n, m, q, w, e, KC_ENT
 
 // First row with numbers is the same across all layouts
@@ -44,6 +54,7 @@
 
 // Last row with modifiers
 #define M_GRID_R5     KC_LCTL, KC_LGUI, KC_LALT, BACKLIT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+#define M_MAC_R5      KC_LCTL, BACKLIT, KC_LALT, KC_LGUI, LOWER,   _______, _______, _______, _______, _______, _______, _______
 #define M_GAME_R5     _______, _______, _______, _______, G_LOWER, _______, _______, _______, _______, _______, _______, _______
 
 // Qwerty layout
@@ -76,19 +87,21 @@
  * `-----------------------------------------------------------------------------------'
  */
 // We split LOWER into two parts since the _GAME_LOWER layer will use the right side of the lower layer as is
-#define M_LOWER_R1 M_LOWER_R2
-#define M_LOWER_R2_L KC_TILD, KC_EXLM, KC_AT,      KC_HASH, KC_DLR,  KC_PERC
-#define M_LOWER_R2_R(bksp) KC_CIRC, KC_AMPR, KC_ASTR,    KC_LPRN, KC_RPRN, bksp
+#define M_LOWER_R2_L    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
+#define M_LOWER_R3_L    KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5
+#define M_LOWER_R4_L    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11
+#define M_LOWER_R5_L    _______, _______, _______, _______, _______, _______
+
+#define M_LOWER_R2_R(b) KC_CIRC, KC_AMPR, KC_ASTR,    KC_LPRN, KC_RPRN, b
+#define M_LOWER_R3_R    KC_F6,   KC_UNDS, KC_PLUS,    KC_LCBR, KC_RCBR, KC_PIPE
+#define M_LOWER_R4_R    KC_F12,S(KC_NUHS),S(KC_NUBS), KC_PSCR, _______, _______
+#define M_LOWER_R5_R    _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END
+
 #define M_LOWER_R2 M_LOWER_R2_L, M_LOWER_R2_R(_______)
-#define M_LOWER_R3_L KC_DEL,  KC_F1,   KC_F2,      KC_F3,   KC_F4,   KC_F5
-#define M_LOWER_R3_R KC_F6,   KC_UNDS, KC_PLUS,    KC_LCBR, KC_RCBR, KC_PIPE
 #define M_LOWER_R3 M_LOWER_R3_L, M_LOWER_R3_R
-#define M_LOWER_R4_L _______, KC_F7,   KC_F8,      KC_F9,   KC_F10,  KC_F11
-#define M_LOWER_R4_R KC_F12,S(KC_NUHS),S(KC_NUBS), KC_PSCR, _______, _______
 #define M_LOWER_R4 M_LOWER_R4_L, M_LOWER_R4_R
-#define M_LOWER_R5_L _______, _______, _______, _______, _______, _______
-#define M_LOWER_R5_R _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END
 #define M_LOWER_R5 M_LOWER_R5_L, M_LOWER_R5_R
+#define M_LOWER_R1 M_LOWER_R2
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.

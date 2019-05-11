@@ -11,6 +11,6 @@
                                 SONG(DVORAK_SOUND) \
                             }
 
-void layer_state_play_audio(uint32_t state);
+void layer_state_set_audio(uint32_t state);
 
 #endif

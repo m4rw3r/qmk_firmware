@@ -9,6 +9,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY]  = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_QWERTY,  M_GRID_R5),
 [_COLEMAK] = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_COLEMAK, M_GRID_R5),
 [_DVORAK]  = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_DVORAK,  M_GRID_R5),
+[_MAC]     = LAYOUT_preonic_grid_wrapper(M_TRANSPA, M_TRANSPA, M_TRANSPA, M_TRANSPA, M_MAC_R5),
 /* Gaming overrides
  *
  * * Caps Lock replaces ESC, used for push-to-talk in voice
@@ -21,6 +22,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, G_LOWER, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
+// TODO: Populate and move to m4rw3r.h
 /* Keypad layer
  */
 [_KEYPAD] = LAYOUT_preonic_grid( \
@@ -65,19 +67,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_preonic_grid( \
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
   _______, RESET,   DEBUG,   _______, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL,  \
-  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,     GAME, _______, _______, _______, \
-  _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, KEYPAD,  _______, \
+  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  MAC_OFF, MAC_ON,  QWERTY,  COLEMAK, DVORAK,  _______, _______, \
+  _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  GAME,    KEYPAD,  _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 )
 };
-
-bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
-  return true;
-}
-
-uint32_t layer_state_set_keymap(uint32_t state) {
-  return state;
-}
 
 bool muse_mode = false;
 uint8_t last_muse_note = 0;
