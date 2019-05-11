@@ -66,9 +66,7 @@ uint32_t layer_state_set_user(uint32_t state) {
   #endif
 
   #ifdef RGBLIGHT_ENABLE
-  if(user_config.use_rgb_layer_indicators) {
-    layer_state_set_rgb(state);
-  }
+  layer_state_set_rgb(state);
   #endif
 
   return layer_state_set_keymap(state);
@@ -146,7 +144,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
 
   // For any of the RGB codes (see quantum_keycodes.h)
-  case RGB_MODE_FORWARD ... RGB_MODE_GRADIENT:
+  case RGB_MODE_FORWARD ... RGB_HUD:
+  // We skip RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD to allow changes to saturation
+  // and brightness without turning off rgb layer indicators
+  case RGB_SPI ... RGB_MODE_RGBTEST:
     if(record->event.pressed) {
       set_rgb_layer_indicators(false);
     }
