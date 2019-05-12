@@ -17,6 +17,7 @@
 // Note: Important to populate all the layers in keymap.c
 enum userspace_layers {
   // Persistent layers
+  // Note: Must match the order of the keycodes used to switch to them
   _QWERTY = 0,
   _COLEMAK,
   _DVORAK,

@@ -76,7 +76,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {
   case KC_QWERTY ... KC_DVORAK:
     if(record->event.pressed) {
-      // TODO: Use user-version of layer-toggle? or does mac persist since it is enabled
       set_single_persistent_default_layer(keycode - KC_QWERTY);
     }
 
@@ -130,7 +129,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case KC_BACKLIT:
     if(record->event.pressed) {
       #ifdef BACKLIGHT_ENABLE
-        backlight_step();
+      backlight_step();
       #endif
     }
 

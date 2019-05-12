@@ -10,17 +10,18 @@
 #endif
 
 enum userspace_custom_keycodes {
+  // Persistent layer switches
+  // Note: The order of the persistent layers must match the order of these
+  //       keycodes
   KC_QWERTY = USERSPACE_SAFE_RANGE,
   KC_COLEMAK,
   KC_DVORAK,
+  // Userspace toggles
   KC_MAC_OFF,
   KC_MAC_ON,
   KC_BACKLIT,
   KC_RGB_LAYER_INDICATORS,
-  // KC_GAME,
-  // KC_KEYPAD,
-  // KC_LOWER,
-  // KC_RAISE,
+  // Swedish codes mapping to alt-codes or compose-sequences
   KX_AA,
   KX_AE,
   KX_OE,

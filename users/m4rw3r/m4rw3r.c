@@ -64,10 +64,10 @@ void set_mac_layer(bool enabled) {
     user_config_save();
 
     if(user_config.is_mac) {
-        layer_on(_MAC);
+      layer_on(_MAC);
     }
     else {
-        layer_off(_MAC);
+      layer_off(_MAC);
     }
   }
 }
