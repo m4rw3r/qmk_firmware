@@ -29,7 +29,7 @@ enum userspace_custom_keycodes {
 
 #define QWERTY  KC_QWERTY
 #define COLEMAK KC_COLEMAK
-#define DVORAK  KC_COLEMAK
+#define DVORAK  KC_DVORAK
 #define BACKLIT KC_BACKLIT
 // Toggles Mac-layout layer
 #define MAC_ON  KC_MAC_ON
