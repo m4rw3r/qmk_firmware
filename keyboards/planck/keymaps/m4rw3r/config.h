@@ -11,7 +11,12 @@
    - MIDI notes can be sent when in Music mode is on
 */
 
+#define RGBLIGHT_STM32_SPI
+#define RGBLIGHT_ANIMATIONS
 #define MIDI_BASIC
+#define RGB_DI_PIN 1
+#define RGBLED_NUM 2
+#define WS2812_SPI SPID2
 
 /* enable advanced MIDI features:
    - MIDI notes can be added to the keymap
