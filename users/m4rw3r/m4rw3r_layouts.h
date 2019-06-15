@@ -29,13 +29,13 @@
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | GUI  | Alt  |Brite |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * | Ctrl | GUI  | Alt  |Hyper |Lower |    Space    |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  * 
  * On MAC the last row is swapped to:
  * 
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl |Brite | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * | Ctrl |Hyper | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  * 
  * Using the MAC_ON and MAC_OFF keycodes
@@ -53,8 +53,8 @@
 #define M_GRID_R1    M_BASE_R1(KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0)
 
 // Last row with modifiers
-#define M_GRID_R5     KC_LCTL, KC_LGUI, KC_LALT, BACKLIT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
-#define M_MAC_R5      KC_LCTL, BACKLIT, KC_LALT, KC_LGUI, LOWER,   _______, _______, _______, _______, _______, _______, _______
+#define M_GRID_R5     KC_LCTL, KC_LGUI, KC_LALT, KC_HYPR, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+#define M_MAC_R5      KC_LCTL, KC_HYPR, KC_LALT, KC_LGUI, LOWER,   _______, _______, _______, _______, _______, _______, _______
 #define M_GAME_R5     _______, _______, _______, _______, G_LOWER, _______, _______, _______, _______, _______, _______, _______
 
 // Qwerty layout

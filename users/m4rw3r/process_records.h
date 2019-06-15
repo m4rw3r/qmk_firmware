@@ -19,7 +19,6 @@ enum userspace_custom_keycodes {
   // Userspace toggles
   KC_MAC_OFF,
   KC_MAC_ON,
-  KC_BACKLIT,
   KC_RGB_LAYER_INDICATORS,
   // Swedish codes mapping to alt-codes or compose-sequences
   KX_AA,
@@ -31,7 +30,6 @@ enum userspace_custom_keycodes {
 #define QWERTY  KC_QWERTY
 #define COLEMAK KC_COLEMAK
 #define DVORAK  KC_DVORAK
-#define BACKLIT KC_BACKLIT
 // Toggles Mac-layout layer
 #define MAC_ON  KC_MAC_ON
 #define MAC_OFF KC_MAC_OFF

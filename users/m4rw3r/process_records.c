@@ -126,15 +126,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
   }
 
-  case KC_BACKLIT:
-    if(record->event.pressed) {
-      #ifdef BACKLIGHT_ENABLE
-      backlight_step();
-      #endif
-    }
-
-    return false;
-
   case KC_RGB_LAYER_INDICATORS:
     if(record->event.pressed) {
       set_rgb_layer_indicators(true);
