@@ -30,8 +30,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_MAC]        = LAYOUT_planck_grid_wrapper(M_TRANSPA, M_TRANSPA, M_TRANSPA, M_MAC_R5),
 // TODO: Needs better placeholder
 [_GAME]       = LAYOUT_planck_grid_wrapper(M_QWERTY,  M_GAME_R5),
-// TODO: Populate
-[_KEYPAD]     = LAYOUT_planck_grid_wrapper(M_QWERTY,  M_GRID_R5),
 // We populate the game layer just in case
 [_GAME_LOWER] = LAYOUT_planck_grid_wrapper(M_LOWER_R2, M_LOWER_R3, M_LOWER_R4, M_GAME_R5),
 [_LOWER]      = LAYOUT_planck_grid_wrapper(M_LOWER_R2, M_LOWER_R3, M_LOWER_R4, M_LOWER_R5),
