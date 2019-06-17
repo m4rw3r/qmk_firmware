@@ -56,10 +56,6 @@ uint32_t layer_state_set_user(uint32_t state) {
   if(IS_LAYER_STATE_DEACTIVATING(state, _GAME) && IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
     tap_keycode(KC_CAPS);
   }
-  // Turn on Num Lock if we are entering the keypad
-  if(IS_LAYER_STATE_ACTIVATING(state, _KEYPAD) && ! IS_HOST_LED_ON(USB_LED_NUM_LOCK)) {
-    tap_keycode(KC_NLCK);
-  }
 
   #ifdef AUDIO_ENABLE
   layer_state_set_audio(state);

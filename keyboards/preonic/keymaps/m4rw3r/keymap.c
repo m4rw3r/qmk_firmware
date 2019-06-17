@@ -22,17 +22,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, G_LOWER, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
-// TODO: Populate and move to m4rw3r.h
-/* Keypad layer
- */
-[_KEYPAD] = LAYOUT_preonic_grid( \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PSLS, KC_PAST, _______, \
-  _______, _______, _______, _______, _______, _______, _______, KC_PAST, KC_KP_7, KC_KP_8, KC_KP_9, _______, \
-  _______, _______, _______, _______, _______, _______, _______, KC_PSLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, \
-  _______, _______, _______, _______, _______, _______, _______, KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, \
-  _______, _______, _______, _______, _______, _______, _______, _______, KC_KP_0, KC_PDOT, XXXXXXX, XXXXXXX  \
-),
-
 /* Gaming lower layer, main modifier layer, one-handed for gaming-actions.
  * 
  * * ESC on Grave, since Caps Lock replaced ESC on base layer
