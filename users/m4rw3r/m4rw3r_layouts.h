@@ -83,7 +83,7 @@
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO ~ |ISO | | PScr |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Home | PgDn | PgUp | End  |
+ * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 // We split LOWER into two parts since the _GAME_LOWER layer will use the right side of the lower layer as is
@@ -92,10 +92,10 @@
 #define M_LOWER_R4_L    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11
 #define M_LOWER_R5_L    _______, _______, _______, _______, _______, _______
 
-#define M_LOWER_R2_R(b) KC_CIRC, KC_AMPR, KC_ASTR,    KC_LPRN, KC_RPRN, b
-#define M_LOWER_R3_R    KC_F6,   KC_UNDS, KC_PLUS,    KC_LCBR, KC_RCBR, KC_PIPE
-#define M_LOWER_R4_R    KC_F12,S(KC_NUHS),S(KC_NUBS), KC_PSCR, _______, _______
-#define M_LOWER_R5_R    _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END
+#define M_LOWER_R2_R(b) KC_CIRC, KC_AMPR, KC_ASTR,   KC_LPRN, KC_RPRN, b
+#define M_LOWER_R3_R    KC_F6,   KC_UNDS, KC_PLUS,   KC_LCBR, KC_RCBR, KC_PIPE
+#define M_LOWER_R4_R    KC_F12,S(KC_NUHS),S(KC_NUBS),KC_PSCR, _______, _______
+#define M_LOWER_R5_R    _______, _______, KC_MNXT,   KC_VOLD, KC_VOLU, KC_MPLY
 
 #define M_LOWER_R2 M_LOWER_R2_L, M_LOWER_R2_R(_______)
 #define M_LOWER_R3 M_LOWER_R3_L, M_LOWER_R3_R
@@ -111,14 +111,14 @@
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |      |      |   €  |      |      |      |ISO # |ISO / |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |             |      | Home | PgDn | PgUp | End  |
  * `-----------------------------------------------------------------------------------'
  */
 #define M_RAISE_R1 M_RAISE_R2
 #define M_RAISE_R2 KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______
 #define M_RAISE_R3 KC_DEL,  KX_AA,   KX_AE,   KX_OE,   _______, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS
 #define M_RAISE_R4 _______, _______, _______, KX_EURO, _______, _______, _______, KC_NUHS, KC_NUBS, _______, _______, _______
-#define M_RAISE_R5 _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+#define M_RAISE_R5 _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END
 
 /**
  * Standard keyboard-agnostic ADJUST layer row for QWERTY
