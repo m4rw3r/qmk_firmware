@@ -24,7 +24,6 @@ enum userspace_layers {
   _MAC,
   // Temporary layers
   _GAME,
-  _KEYPAD,
   _LOWER,
   _GAME_LOWER,
   _RAISE,

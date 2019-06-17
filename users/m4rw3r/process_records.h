@@ -35,7 +35,6 @@ enum userspace_custom_keycodes {
 #define MAC_OFF KC_MAC_OFF
 #define RGBLAYER KC_RGB_LAYER_INDICATORS
 
-#define KEYPAD  TG(_KEYPAD)
 #define GAME    TG(_GAME)
 #define LOWER   MO(_LOWER)
 #define G_LOWER MO(_GAME_LOWER)
