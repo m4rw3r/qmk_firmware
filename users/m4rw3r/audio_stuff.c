@@ -5,7 +5,7 @@ float game_off_song[][2] = SONG(SCROLL_LOCK_OFF_SOUND);
 float mac_on_song[][2]  = SONG(AG_SWAP_SOUND);
 float mac_off_song[][2] = SONG(AG_NORM_SOUND);
 
-void layer_state_set_audio(uint32_t state) {
+void layer_state_set_audio(layer_state_t state) {
   switch(biton32(LAYER_STATE_ACTIVATING(state))) {
   case _MAC:
     return PLAY_SONG(mac_on_song);

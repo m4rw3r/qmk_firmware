@@ -44,7 +44,7 @@ char *alt_seq_mac[][2] = {
 
 // TODO: default_layer_state_set_user(state)
 
-uint32_t layer_state_set_user(uint32_t state) {
+layer_state_t layer_state_set_user(layer_state_t state) {
   // Custom version of update_tri_layer_state to allow for deactivation while old state is held
   state = update_tri_layer_states(
     state,

@@ -57,7 +57,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
 /**
  * Keymap version of layer_state_set, callback called when layers are set.
  */
-uint32_t layer_state_set_keymap(uint32_t state);
+layer_state_t layer_state_set_keymap(layer_state_t state);
 
 /**
  * Keymap version of keyboard_post_init_user.
@@ -91,7 +91,12 @@ void user_config_save(void);
  * mask3 is applied to state, otherwise mask3 is removed from
  * state.
  */
-uint32_t update_tri_layer_states(uint32_t state, uint32_t mask1, uint32_t mask2, uint32_t mask3);
+layer_state_t update_tri_layer_states(
+  layer_state_t state,
+  layer_state_t mask1,
+  layer_state_t mask2,
+  layer_state_t mask3
+);
 
 /**
  * Taps the given keycode once.

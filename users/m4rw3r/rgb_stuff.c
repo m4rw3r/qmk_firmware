@@ -14,15 +14,14 @@ void rgb_set_solid_hue(uint8_t hue) {
   rgblight_sethsv_noeeprom(hue, rgblight_get_sat(), rgblight_get_val());
 }
 
-void layer_state_set_rgb(uint32_t state) {
+void layer_state_set_rgb(layer_state_t state) {
   // Store base RGBlight settings, make sure to do this before we exit
   switch(biton32(layer_state)) {
   case _GAME:
-  case _RAISE:
   case _GAME_LOWER:
+  case _RAISE:
   case _LOWER:
   case _ADJUST:
-  case _KEYPAD:
     // Do not save if we are not on a base-layer
     break;
   default:
@@ -51,10 +50,6 @@ void layer_state_set_rgb(uint32_t state) {
   case _ADJUST:
     // Green
     rgb_set_solid_hue(85);
-    break;
-  case _KEYPAD:
-    // Teal
-    rgb_set_solid_hue(128);
     break;
   default:
     // Reset to user configuration, does not work

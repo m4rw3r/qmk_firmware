@@ -11,7 +11,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 
 // Default implementation
 __attribute__((weak))
-uint32_t layer_state_set_keymap(uint32_t state) {
+layer_state_t layer_state_set_keymap(layer_state_t state) {
   return state;
 }
 
@@ -92,7 +92,12 @@ void toggle_mac_layer() {
   set_mac_layer( ! user_config.is_mac);
 }
 
-uint32_t update_tri_layer_states(uint32_t state, uint32_t mask1, uint32_t mask2, uint32_t mask3) {
+layer_state_t update_tri_layer_states(
+  layer_state_t state,
+  layer_state_t mask1,
+  layer_state_t mask2,
+  layer_state_t mask3
+) {
   return (state & mask1) && (state & mask2) ? (state | mask3) : (state & ~mask3);
 }
 
