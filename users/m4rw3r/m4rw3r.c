@@ -1,6 +1,15 @@
 #include "m4rw3r.h"
 #include "eeprom.h"
 
+#if defined(__AVR__)
+  #include <stdio.h>
+#else
+  // ChibiOS does not have snprintf use a similar interface
+
+  #include "chprintf.h"
+  #define snprintf chsnprintf
+#endif
+
 user_config_t user_config;
 
 // Default implementation
@@ -128,4 +137,40 @@ layer_state_t update_tri_layer_states(
 void tap_keycode(uint16_t keycode) {
   register_code(keycode);
   unregister_code(keycode);
+}
+
+char layer_state_str[16];
+
+const char *get_layer_state_name(void) {
+  switch(biton32(layer_state)) {
+  case _QWERTY:
+  case _COLEMAK:
+  case _DVORAK:
+    sprintf(layer_state_str, "Default");
+    break;
+  case _MAC:
+    sprintf(layer_state_str, "Mac");
+    break;
+  // Temporary layers
+  case _GAME:
+    sprintf(layer_state_str, "Game");
+    break;
+  case _LOWER:
+    sprintf(layer_state_str, "Lower");
+    break;
+  case _GAME_LOWER:
+    sprintf(layer_state_str, "Game Lower");
+    break;
+  case _RAISE:
+    sprintf(layer_state_str, "Raise");
+    break;
+  case _ADJUST:
+    sprintf(layer_state_str, "Adjust");
+    break;
+  default:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Undef-%lx", layer_state);
+    break;
+  }
+
+  return layer_state_str;
 }

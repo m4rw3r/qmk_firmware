@@ -118,4 +118,9 @@ layer_state_t update_tri_layer_states(
  */
 void tap_keycode(uint16_t keycode);
 
+/**
+ * Reads the given layer and returns a user-readable layer name.
+ */
+const char *get_layer_state_name(void);
+
 #endif
