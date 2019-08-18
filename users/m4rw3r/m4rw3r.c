@@ -17,11 +17,31 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
 
 // Default implementation
 __attribute__((weak))
+void keyboard_pre_init_keymap(void) { }
+
+// Default implementation
+__attribute__((weak))
 void keyboard_post_init_keymap(void) { }
 
 // Default implementation
 __attribute__((weak))
 void eeconfig_init_keymap(void) { }
+
+// Default implementation
+__attribute__((weak))
+void matrix_init_keymap(void) { }
+
+// Default implementation
+__attribute__((weak))
+void matrix_scan_keymap(void) { }
+
+void keyboard_pre_init_user(void) {
+  keyboard_pre_init_keymap();
+}
+
+void matrix_init_user(void) {
+  matrix_init_keymap();
+}
 
 // Loads data from EEPROM and inits user stuff
 void keyboard_post_init_user(void) {
@@ -54,6 +74,10 @@ void eeconfig_init_user(void) {
   #endif
 
   eeconfig_init_keymap();
+}
+
+void matrix_scan_user(void) {
+  matrix_scan_keymap();
 }
 
 void set_mac_layer(bool enabled) {

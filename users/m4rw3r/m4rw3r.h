@@ -60,6 +60,11 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
 layer_state_t layer_state_set_keymap(layer_state_t state);
 
 /**
+ * Keymap version of keyboard_pre_init_user.
+ */
+void keyboard_pre_init_keymap(void);
+
+/**
  * Keymap version of keyboard_post_init_user.
  */
 void keyboard_post_init_keymap(void);
@@ -68,6 +73,16 @@ void keyboard_post_init_keymap(void);
  * Keymap version of eeconfig_init_user.
  */
 void eeconfig_init_keymap(void);
+
+/**
+ * Keymap version of matrix_init_user.
+ */
+void matrix_init_keymap(void);
+
+/**
+ * Keymap version of matrix_scan_user.
+ */
+void matrix_scan_keymap(void);
 
 /**
  * Sets the Mac layer state and saves the configuration
