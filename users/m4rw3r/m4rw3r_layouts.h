@@ -44,13 +44,18 @@
 #define M_TRANSPA     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 
 // Some basic modifiers independent of basic layout
-#define M_BASE_R1(a, b, c, d, e, f, g, h, i, j)    KC_GRV,  a, b, c, d, e, f, g, h, i, j, KC_DEL
-#define M_BASE_R2(q, w, e, r, t, y, u, i, o, p)    KC_TAB,  q, w, e, r, t, y, u, i, o, p, KC_BSPC
-#define M_BASE_R3(a, s, d, f, g, h, j, k, l, q, w) CTL_ESC, a, s, d, f, g, h, j, k, l, q, w
-#define M_BASE_R4(z, x, c, v, b, n, m, q, w, e)    KC_LSFT, z, x, c, v, b, n, m, q, w, e, KC_ENT
+#define M_ORTHO_R1_INNER(a, b, c, d, e, f, g, h, i, j)    KC_GRV,  a, b, c, d, e, f, g, h, i, j, KC_DEL
+#define M_ORTHO_R2_INNER(q, w, e, r, t, y, u, i, o, p)    KC_TAB,  q, w, e, r, t, y, u, i, o, p, KC_BSPC
+#define M_ORTHO_R3_INNER(a, s, d, f, g, h, j, k, l, q, w) CTL_ESC, a, s, d, f, g, h, j, k, l, q, w
+#define M_ORTHO_R4_INNER(z, x, c, v, b, n, m, q, w, e)    KC_LSFT, z, x, c, v, b, n, m, q, w, e, KC_ENT
+
+#define M_ORTHO_R1(...) M_ORTHO_R1_INNER(__VA_ARGS__)
+#define M_ORTHO_R2(...) M_ORTHO_R2_INNER(__VA_ARGS__)
+#define M_ORTHO_R3(...) M_ORTHO_R3_INNER(__VA_ARGS__)
+#define M_ORTHO_R4(...) M_ORTHO_R4_INNER(__VA_ARGS__)
 
 // First row with numbers is the same across all layouts
-#define M_GRID_R1    M_BASE_R1(KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0)
+#define M_GRID_R1    M_ORTHO_R1(KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0)
 
 // Last row with modifiers
 #define M_GRID_R5     KC_LCTL, KC_LGUI, KC_LALT, KC_HYPR, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
@@ -58,22 +63,19 @@
 #define M_GAME_R5     _______, _______, _______, _______, G_LOWER, _______, _______, _______, _______, _______, _______, _______
 
 // Qwerty layout
-#define M_QWERTY_R2  M_BASE_R2(KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P)
-#define M_QWERTY_R3  M_BASE_R3(KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT)
-#define M_QWERTY_R4  M_BASE_R4(KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH)
-#define M_QWERTY M_QWERTY_R2, M_QWERTY_R3, M_QWERTY_R4
+#define M_QWERTY_R2  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P
+#define M_QWERTY_R3  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT
+#define M_QWERTY_R4  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH
 
 // Colemak layout
-#define M_COLEMAK_R2 M_BASE_R2(KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN)
-#define M_COLEMAK_R3 M_BASE_R3(KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O, KC_QUOT)
-#define M_COLEMAK_R4 M_BASE_R4(KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH)
-#define M_COLEMAK M_COLEMAK_R2, M_COLEMAK_R3, M_COLEMAK_R4
+#define M_COLEMAK_R2 KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN
+#define M_COLEMAK_R3 KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O, KC_QUOT
+#define M_COLEMAK_R4 KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH
 
 // Dvorak layout
-#define M_DVORAK_R2  M_BASE_R2(KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L)
-#define M_DVORAK_R3  M_BASE_R3(KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, KC_SLSH)
-#define M_DVORAK_R4  M_BASE_R4(KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z)
-#define M_DVORAK M_DVORAK_R2, M_DVORAK_R3, M_DVORAK_R4
+#define M_DVORAK_R2  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L
+#define M_DVORAK_R3  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, KC_SLSH
+#define M_DVORAK_R4  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z
 
 /* Lower
  * ,-----------------------------------------------------------------------------------.
@@ -127,6 +129,6 @@
  * |      | Reset| Debug|      |      |      |      |TermOn|TermOff      |      | Del  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  */
-#define M_ADJUST_R2 _______, RESET,   DEBUG,   _______, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL
+#define M_ADJUST_R2 _______, RESET,   DEBUG,   EEP_RST, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL
 
 #endif

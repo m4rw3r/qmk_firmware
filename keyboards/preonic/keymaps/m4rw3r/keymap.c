@@ -6,10 +6,10 @@
 #define LAYOUT_preonic_grid_wrapper(...) LAYOUT_preonic_grid(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-[_QWERTY]  = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_QWERTY,  M_GRID_R5),
-[_COLEMAK] = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_COLEMAK, M_GRID_R5),
-[_DVORAK]  = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_DVORAK,  M_GRID_R5),
-[_MAC]     = LAYOUT_preonic_grid_wrapper(M_TRANSPA, M_TRANSPA, M_TRANSPA, M_TRANSPA, M_MAC_R5),
+[_QWERTY] = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_ORTHO_R2(M_QWERTY_R2), M_ORTHO_R3(M_QWERTY_R3), M_ORTHO_R4(M_QWERTY_R4), M_GRID_R5),
+[_COLEMAK] = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_ORTHO_R2(M_COLEMAK_R2), M_ORTHO_R3(M_COLEMAK_R3), M_ORTHO_R4(M_COLEMAK_R4), M_GRID_R5),
+[_DVORAK] = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_ORTHO_R2(M_DVORAK_R2), M_ORTHO_R3(M_DVORAK_R3), M_ORTHO_R4(M_DVORAK_R4), M_GRID_R5),
+[_MAC] = LAYOUT_preonic_grid_wrapper(M_TRANSPA, M_TRANSPA, M_TRANSPA, M_TRANSPA, M_MAC_R5),
 /* Gaming overrides
  *
  * * Caps Lock replaces ESC, used for push-to-talk in voice
@@ -115,7 +115,7 @@ void dip_update(uint8_t index, bool active) {
    }
 }
 
-void matrix_scan_user(void) {
+void matrix_scan_keymap(void) {
   #ifdef AUDIO_ENABLE
     if (muse_mode) {
       if (muse_counter == 0) {
