@@ -20,6 +20,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   M_ADJUST_R2, \
   RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, MAC_OFF, MAC_ON,  QWERTY,  COLEMAK, DVORAK,  _______, _______, \
   RGBLAYER,RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, _______, _______, _______, _______, _______, _______, _______, \
-  BL_TOGG, BL_STEP, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+  BL_TOGG, BL_STEP, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_BRID, KC_BRIU, _______  \
 ),
 };

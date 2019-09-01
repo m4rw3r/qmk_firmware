@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   M_ADJUST_R2,
   _______, _______, MU_MOD,  AU_ON,   AU_OFF,  MAC_OFF, MAC_ON,  QWERTY,  COLEMAK,  DVORAK,  _______, _______,
   _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______,  _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
+  M_ADJUST_R5
 )
 };
 

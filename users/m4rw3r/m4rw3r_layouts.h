@@ -57,7 +57,7 @@
 // First row with numbers is the same across all layouts
 #define M_GRID_R1    M_ORTHO_R1(KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0)
 
-// Last row with modifiers
+// Last row with modifiers for ortho
 #define M_GRID_R5     KC_LCTL, KC_LGUI, KC_LALT, KC_HYPR, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 #define M_MAC_R5      KC_LCTL, KC_HYPR, KC_LALT, KC_LGUI, LOWER,   _______, _______, _______, _______, _______, _______, _______
 #define M_GAME_R5     _______, _______, _______, _______, G_LOWER, _______, _______, _______, _______, _______, _______, _______
@@ -123,12 +123,19 @@
 #define M_RAISE_R5 _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END
 
 /**
- * Standard keyboard-agnostic ADJUST layer row for QWERTY
+ * Standard keyboard-agnostic ADJUST layer row for QWERTY and bottom row for ortho
  *
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      | Reset| Debug|      |      |      |      |TermOn|TermOff      |      | Del  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |   -  |      |      |      |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |             |      | Prev |Bright-Bright+      |
+ * `-----------------------------------------------------------------------------------'
  */
 #define M_ADJUST_R2 _______, RESET,   DEBUG,   EEP_RST, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL
+#define M_ADJUST_R5 _______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_BRID, KC_BRIU, _______
 
 #endif
