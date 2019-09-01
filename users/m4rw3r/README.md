@@ -14,6 +14,12 @@ make -j16 --output-sync preonic/rev3:m4rw3r planck/rev6:m4rw3r niu_mini:m4rw3r c
 make preonic/rev3:m4rw3r:dfu-util
 ```
 
+#### Planck
+
+```bash
+make planck/rev6:m4rw3r:dfu-util
+```
+
 #### NIU Mini
 
 ```bash
