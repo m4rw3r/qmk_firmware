@@ -58,8 +58,8 @@
 #define M_GRID_R1    M_ORTHO_R1(KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0)
 
 // Last row with modifiers for ortho
-#define M_GRID_R5     KC_LCTL, KC_LGUI, KC_LALT, KC_HYPR, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
-#define M_MAC_R5      KC_LCTL, KC_HYPR, KC_LALT, KC_LGUI, LOWER,   _______, _______, _______, _______, _______, _______, _______
+#define M_GRID_R5     KC_LCTL, KC_LGUI, KC_LALT, KC_F13,  LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+#define M_MAC_R5      KC_LCTL, KC_F13,  KC_LALT, KC_LGUI, LOWER,   _______, _______, _______, _______, _______, _______, _______
 #define M_GAME_R5     _______, _______, _______, _______, G_LOWER, _______, _______, _______, _______, _______, _______, _______
 
 // Qwerty layout
