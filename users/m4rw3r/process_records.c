@@ -70,12 +70,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {
-  case KC_QWERTY ... KC_DVORAK:
-    if(record->event.pressed) {
-      set_single_persistent_default_layer(keycode - KC_QWERTY);
-    }
-
-    return false;
   case KC_MAC_ON:
     if(record->event.pressed) {
       set_mac_layer(true);
@@ -114,11 +108,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // Choose Alt code based on which key was pressed and whether Shift was held.
       send_string(alt_seq_win[index][(bool)shift]);
     }
-    
+
     // Restore shift keys to previous state
     if(shift & MOD_BIT(KC_LSFT)) { register_code(KC_LSFT); }
     if(shift & MOD_BIT(KC_RSFT)) { register_code(KC_RSFT); }
-    
+
     return false;
   }
 

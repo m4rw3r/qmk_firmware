@@ -3,11 +3,8 @@
 
 #include "m4rw3r.h"
 
-// TODO: HJKL with modifier?
 // TODO: What to put on the brightness key?
 // TODO: Use a mouse-key instead of caps for push to talk?
-// TODO: Support for Swedish layout (something remapping modifiers producing the same output as US)
-// TODO: Brightness controls on a mac
 // TODO: Make sure it matches planck too
 
 /**
@@ -17,6 +14,8 @@
  * - Swapped GUI and Alt to mimic standard Windows keyboard
  * - Raise/lower no longer change BKSP to DEL
  * - Lower + arrows = Home, pgdn, pgup, end
+ * - Drop Colemak and Dvorak
+ * - ADJUST HJKL are arrows
  */
 
 /* Qwerty
@@ -43,39 +42,15 @@
 
 #define M_TRANSPA     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 
-// Some basic modifiers independent of basic layout
-#define M_ORTHO_R1_INNER(a, b, c, d, e, f, g, h, i, j)    KC_GRV,  a, b, c, d, e, f, g, h, i, j, KC_DEL
-#define M_ORTHO_R2_INNER(q, w, e, r, t, y, u, i, o, p)    KC_TAB,  q, w, e, r, t, y, u, i, o, p, KC_BSPC
-#define M_ORTHO_R3_INNER(a, s, d, f, g, h, j, k, l, q, w) CTL_ESC, a, s, d, f, g, h, j, k, l, q, w
-#define M_ORTHO_R4_INNER(z, x, c, v, b, n, m, q, w, e)    KC_LSFT, z, x, c, v, b, n, m, q, w, e, KC_ENT
-
-#define M_ORTHO_R1(...) M_ORTHO_R1_INNER(__VA_ARGS__)
-#define M_ORTHO_R2(...) M_ORTHO_R2_INNER(__VA_ARGS__)
-#define M_ORTHO_R3(...) M_ORTHO_R3_INNER(__VA_ARGS__)
-#define M_ORTHO_R4(...) M_ORTHO_R4_INNER(__VA_ARGS__)
-
-// First row with numbers is the same across all layouts
-#define M_GRID_R1    M_ORTHO_R1(KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0)
+#define M_BASE_R1  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL
+#define M_BASE_R2  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC
+#define M_BASE_R3  CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT
+#define M_BASE_R4  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT
 
 // Last row with modifiers for ortho
-#define M_GRID_R5     KC_LCTL, KC_LGUI, KC_LALT, KC_F13,  LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+#define M_BASE_R5     KC_LCTL, KC_LGUI, KC_LALT, KC_F13,  LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 #define M_MAC_R5      KC_LCTL, KC_F13,  KC_LALT, KC_LGUI, LOWER,   _______, _______, _______, _______, _______, _______, _______
 #define M_GAME_R5     _______, _______, _______, _______, G_LOWER, _______, _______, _______, _______, _______, _______, _______
-
-// Qwerty layout
-#define M_QWERTY_R2  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P
-#define M_QWERTY_R3  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT
-#define M_QWERTY_R4  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH
-
-// Colemak layout
-#define M_COLEMAK_R2 KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN
-#define M_COLEMAK_R3 KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O, KC_QUOT
-#define M_COLEMAK_R4 KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH
-
-// Dvorak layout
-#define M_DVORAK_R2  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L
-#define M_DVORAK_R3  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, KC_SLSH
-#define M_DVORAK_R4  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z
 
 /* Lower
  * ,-----------------------------------------------------------------------------------.
@@ -122,20 +97,21 @@
 #define M_RAISE_R4 _______, _______, _______, KX_EURO, _______, _______, _______, KC_NUHS, KC_NUBS, _______, _______, _______
 #define M_RAISE_R5 _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END
 
+// TODO: Update media on Planck/Preonic
 /**
  * Standard keyboard-agnostic ADJUST layer row for QWERTY and bottom row for ortho
  *
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      | Reset| Debug|      |      |      |      |TermOn|TermOff      |      | Del  |
+ * |      | Reset| Debug|EEPRES|      |MACOFF|MACON |TermOn|TermOff      |      | Del  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |   -  |      |      |      |      |
+ * |      |      |      |      |      |      | LEFT | DOWN |  UP  |RIGHT |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |MPrev | Vol- | Vol+ |MNext |      |Play  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Prev |Bright-Bright+      |
  * `-----------------------------------------------------------------------------------'
  */
-#define M_ADJUST_R2 _______, RESET,   DEBUG,   EEP_RST, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL
+#define M_ADJUST_R2 _______, RESET,   DEBUG,   EEP_RST, _______, MAC_OFF, MAC_ON,  TERM_ON, TERM_OFF,_______, _______, KC_DEL
 #define M_ADJUST_R5 _______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_BRID, KC_BRIU, _______
 
 #endif

@@ -18,9 +18,7 @@
 enum userspace_layers {
   // Persistent layers
   // Note: Must match the order of the keycodes used to switch to them
-  _QWERTY = 0,
-  _COLEMAK,
-  _DVORAK,
+  _BASE = 0,
   _MAC,
   // Temporary layers
   _GAME,

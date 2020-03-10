@@ -24,19 +24,17 @@
 extern keymap_config_t keymap_config;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-[_QWERTY] = LAYOUT_planck_grid_wrapper(M_ORTHO_R2(M_QWERTY_R2), M_ORTHO_R3(M_QWERTY_R3), M_ORTHO_R4(M_QWERTY_R4), M_GRID_R5),
-[_COLEMAK] = LAYOUT_planck_grid_wrapper(M_ORTHO_R2(M_COLEMAK_R2), M_ORTHO_R3(M_COLEMAK_R3), M_ORTHO_R4(M_COLEMAK_R4), M_GRID_R5),
-[_DVORAK] = LAYOUT_planck_grid_wrapper(M_ORTHO_R2(M_DVORAK_R2), M_ORTHO_R3(M_DVORAK_R3), M_ORTHO_R4(M_DVORAK_R4), M_GRID_R5),
+[_BASE] = LAYOUT_planck_grid_wrapper(M_BASE_R2, M_BASE_R3, M_BASE_R4, M_BASE_R5),
 [_MAC] = LAYOUT_planck_grid_wrapper(M_TRANSPA, M_TRANSPA, M_TRANSPA, M_MAC_R5),
 // Placeholder:
 [_GAME] = LAYOUT_planck_grid_wrapper(M_TRANSPA, M_TRANSPA, M_TRANSPA, M_GAME_R5),
+[_LOWER] = LAYOUT_planck_grid_wrapper(M_LOWER_R2, M_LOWER_R3, M_LOWER_R4, M_LOWER_R5),
 // We populate the game layer just in case
 [_GAME_LOWER] = LAYOUT_planck_grid_wrapper(M_LOWER_R2, M_LOWER_R3, M_LOWER_R4, M_GAME_R5),
-[_LOWER] = LAYOUT_planck_grid_wrapper(M_LOWER_R2, M_LOWER_R3, M_LOWER_R4, M_LOWER_R5),
 [_RAISE] = LAYOUT_planck_grid_wrapper(M_RAISE_R2, M_RAISE_R3, M_RAISE_R4, M_RAISE_R5),
 [_ADJUST] = LAYOUT_planck_grid_wrapper(
   M_ADJUST_R2,
-  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  MAC_OFF, MAC_ON,  QWERTY,  COLEMAK,  DVORAK,  _______, _______,
+  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  _______, KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT,  _______, _______,
   _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______,  _______, _______, _______,
   M_ADJUST_R5
 )

@@ -12,9 +12,10 @@ extern rgblight_config_t rgblight_config;
 
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
+// TODO: Drop CTRL on CRKBD to allow for a VIM-layer?
 #define THUMB_CLUSTER KC_LALT,  LOWER,  KC_LCTL,      KC_SPACE,  RAISE, KC_LGUI
 
-// TODO: Arrows
+// TODO: PgUp, PgDown, Home, End
 // TODO: Media controls
 // TODO: Iron out the thumb-clusters
 
@@ -33,14 +34,17 @@ extern rgblight_config_t rgblight_config;
 #define LAYOUT_crkbd_base_wrapper(...) LAYOUT_crkbd_base(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_QWERTY] = LAYOUT_crkbd_base_wrapper(M_QWERTY_R2, M_QWERTY_R3, M_QWERTY_R4),
-    [_COLEMAK] = LAYOUT_crkbd_base_wrapper(M_COLEMAK_R2, M_COLEMAK_R3, M_COLEMAK_R4),
-    [_DVORAK] = LAYOUT_crkbd_base_wrapper(M_DVORAK_R2, M_DVORAK_R3, M_DVORAK_R4),
+    [_BASE] = LAYOUT_wrapper(\
+        M_BASE_R2,\
+        M_BASE_R3,\
+        M_BASE_R4,\
+        THUMB_CLUSTER\
+    ),
     [_MAC] = LAYOUT_wrapper(\
         M_TRANSPA,\
         M_TRANSPA,\
         M_TRANSPA,\
-        KC_LALT,  LOWER,  KC_LGUI,      KC_SPACE,  RAISE, KC_LCTL \
+        KC_LALT,  LOWER,  KC_LGUI,      KC_SPACE,  RAISE, KC_LCTL\
     ),
     [_GAME] = LAYOUT_wrapper(\
         M_TRANSPA,\
@@ -68,8 +72,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_ADJUST] = LAYOUT_wrapper(\
         M_ADJUST_R2,\
-  RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, MAC_OFF,    MAC_ON,  QWERTY,  COLEMAK, DVORAK,  _______, _______, \
-  RGBLAYER,RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, _______,    _______, _______, _______, _______, _______, _______, \
+  RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _______,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,  _______, _______, \
+  RGBLAYER,RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, _______,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _______, KC_MPLY, \
                         _______, _______, _______, _______, _______, _______ \
     ),
 };

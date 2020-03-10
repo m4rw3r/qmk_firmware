@@ -6,9 +6,7 @@
 #define LAYOUT_preonic_grid_wrapper(...) LAYOUT_preonic_grid(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-[_QWERTY] = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_ORTHO_R2(M_QWERTY_R2), M_ORTHO_R3(M_QWERTY_R3), M_ORTHO_R4(M_QWERTY_R4), M_GRID_R5),
-[_COLEMAK] = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_ORTHO_R2(M_COLEMAK_R2), M_ORTHO_R3(M_COLEMAK_R3), M_ORTHO_R4(M_COLEMAK_R4), M_GRID_R5),
-[_DVORAK] = LAYOUT_preonic_grid_wrapper(M_GRID_R1, M_ORTHO_R2(M_DVORAK_R2), M_ORTHO_R3(M_DVORAK_R3), M_ORTHO_R4(M_DVORAK_R4), M_GRID_R5),
+[_BASE] = LAYOUT_preonic_grid_wrapper(M_BASE_R1, M_BASE_R2, M_BASE_R3, M_BASE_R4, M_BASE_R5),
 [_MAC] = LAYOUT_preonic_grid_wrapper(M_TRANSPA, M_TRANSPA, M_TRANSPA, M_TRANSPA, M_MAC_R5),
 /* Gaming overrides
  *
@@ -44,9 +42,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | Reset|      |      |      |      |      |      |      |      |      |  Del |
+ * |      | Reset|      |      |      |MacOff|MacOn |      |      |      |      |  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |      |      |Aud on|AudOff|MacOff|MacOn |Qwerty|Colemk|Dvorak|      |      |
+ * |      |      |      |Aud on|AudOff|      | Left | Down |  Up  |Right |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |Voice-|Voice+|Mus on|MusOff|MidiOn|MidOff|      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -56,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_preonic_grid_wrapper( \
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
   M_ADJUST_R2, \
-  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  MAC_OFF, MAC_ON,  QWERTY,  COLEMAK, DVORAK,  _______, _______, \
+  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,  _______, _______, \
   _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  GAME,    _______, _______, _______, _______, \
   M_ADJUST_R5 \
 )
