@@ -96,6 +96,10 @@ void set_mac_layer(bool enabled) {
   }
 }
 
+void toggle_mac_layer() {
+  set_mac_layer( ! user_config.is_mac);
+}
+
 void set_rgb_layer_indicators(bool enabled) {
   // Only update if different, saves EEPROM
   if(user_config.use_rgb_layer_indicators != enabled) {
@@ -112,19 +116,23 @@ void set_rgb_layer_indicators(bool enabled) {
   }
 }
 
-void toggle_mac_layer() {
-  set_mac_layer( ! user_config.is_mac);
-}
-
+/**
+ * Applies layer mask `mask_c` if both `mask_a` and `mask_b` are matching at
+ * least one layer each of the current layers, if at least one of them is not
+ * enabled, `mask_c` is removed.
+ */
 layer_state_t update_tri_layer_states(
   layer_state_t state,
-  layer_state_t mask1,
-  layer_state_t mask2,
-  layer_state_t mask3
+  layer_state_t mask_a,
+  layer_state_t mask_b,
+  layer_state_t mask_c
 ) {
-  return (state & mask1) && (state & mask2) ? (state | mask3) : (state & ~mask3);
+  return (state & mask_a) && (state & mask_b) ? (state | mask_c) : (state & ~mask_c);
 }
 
+/**
+ * Taps the given keycode.
+ */
 void tap_keycode(uint16_t keycode) {
   register_code(keycode);
   unregister_code(keycode);
