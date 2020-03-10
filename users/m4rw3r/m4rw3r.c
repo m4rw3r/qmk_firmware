@@ -1,15 +1,6 @@
 #include "m4rw3r.h"
 #include "eeprom.h"
 
-#if defined(__AVR__)
-  #include <stdio.h>
-#else
-  // ChibiOS does not have snprintf use a similar interface
-
-  #include "chprintf.h"
-  #define snprintf chsnprintf
-#endif
-
 user_config_t user_config;
 
 // Default implementation
@@ -139,38 +130,35 @@ void tap_keycode(uint16_t keycode) {
   unregister_code(keycode);
 }
 
-char layer_state_str[16];
-
+/**
+ * Returns a pointer to a static string containing the name for the currently
+ * used layer.
+ *
+ * Not using a dynamic string to save some bytes to not include s[n]printf.
+ */
 const char *get_layer_state_name(void) {
   switch(biton32(layer_state)) {
-  case _QWERTY:
-  case _COLEMAK:
-  case _DVORAK:
-    sprintf(layer_state_str, "Default");
-    break;
+  case _BASE:
+    return "Default";
   case _MAC:
-    sprintf(layer_state_str, "Mac");
-    break;
+    return "Mac";
   // Temporary layers
   case _GAME:
-    sprintf(layer_state_str, "Game");
+    return "Game";
     break;
   case _LOWER:
-    sprintf(layer_state_str, "Lower");
+    return "Lower";
     break;
   case _GAME_LOWER:
-    sprintf(layer_state_str, "Game Lower");
+    return "Game Lower";
     break;
   case _RAISE:
-    sprintf(layer_state_str, "Raise");
+    return "Raise";
     break;
   case _ADJUST:
-    sprintf(layer_state_str, "Adjust");
+    return "Adjust";
     break;
   default:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Undef-%lx", layer_state);
-    break;
+    return "Unknown";
   }
-
-  return layer_state_str;
 }
