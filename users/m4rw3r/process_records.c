@@ -10,6 +10,7 @@ const uint32_t PROGMEM unicode_map[] = {
   [U_AE_UC] = 0x00C4,
   [U_OE] = 0x00F6,
   [U_OE_UC] = 0x00D6,
+  [U_EUR] = 0x20AC,
 };
 
 // TODO: default_layer_state_set_user(state)
