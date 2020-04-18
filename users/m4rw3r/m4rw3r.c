@@ -43,8 +43,8 @@ void matrix_init_user(void) {
   matrix_init_keymap();
 }
 
-void activate_host_os(HostOS s) {
-  switch(user_config.host_os) {
+void activate_host_os(HostOS os) {
+  switch(os) {
   case OS_LNX:
     layer_off(_MAC);
     set_unicode_input_mode(UC_LNX);
@@ -59,6 +59,10 @@ void activate_host_os(HostOS s) {
     layer_off(_MAC);
     set_unicode_input_mode(UC_WIN);
   }
+
+  #ifdef AUDIO_ENABLE
+  play_os_song(os);
+  #endif
 }
 
 // Loads data from EEPROM and inits user stuff

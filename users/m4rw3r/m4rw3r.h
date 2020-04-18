@@ -6,14 +6,6 @@
 #include "process_records.h"
 #include "config_common.h"
 
-#ifdef AUDIO_ENABLE
-#include "audio_stuff.h"
-#endif
-
-#ifdef RGBLIGHT_ENABLE
-#include "rgb_stuff.h"
-#endif
-
 // Note: Important to populate all the layers in keymap.c
 enum userspace_layers {
   // Persistent layers
@@ -55,6 +47,14 @@ typedef union {
 
 #define LAYER_STATE_ACTIVATING(state) (layer_state ^ (state)) & (state)
 #define LAYER_STATE_DEACTIVATING(state) (layer_state ^ (state)) & ~(state)
+
+#ifdef AUDIO_ENABLE
+#include "audio_stuff.h"
+#endif
+
+#ifdef RGBLIGHT_ENABLE
+#include "rgb_stuff.h"
+#endif
 
 /**
  * Keymap version of process records, default to return true.
