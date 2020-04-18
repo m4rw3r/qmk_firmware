@@ -43,13 +43,29 @@ void matrix_init_user(void) {
   matrix_init_keymap();
 }
 
+void activate_host_os(HostOS s) {
+  switch(user_config.host_os) {
+  case OS_LNX:
+    layer_off(_MAC);
+    set_unicode_input_mode(UC_LNX);
+    break;
+
+  case OS_MAC:
+    layer_on(_MAC);
+    set_unicode_input_mode(UC_MAC);
+    break;
+
+  default:
+    layer_off(_MAC);
+    set_unicode_input_mode(UC_WIN);
+  }
+}
+
 // Loads data from EEPROM and inits user stuff
 void keyboard_post_init_user(void) {
   user_config.raw = eeconfig_read_user();
 
-  if(user_config.is_mac) {
-    layer_on(_MAC);
-  }
+  activate_host_os(user_config.host_os);
 
   #ifdef RGBLIGHT_ENABLE
   layer_state_set_rgb(layer_state);
@@ -80,24 +96,15 @@ void matrix_scan_user(void) {
   matrix_scan_keymap();
 }
 
-void set_mac_layer(bool enabled) {
+void set_host_os(HostOS os) {
   // Only update if different, saves EEPROM
-  if(user_config.is_mac != enabled) {
-    user_config.is_mac = enabled;
+  if(user_config.host_os != os) {
+    user_config.host_os = os;
 
     user_config_save();
 
-    if(user_config.is_mac) {
-      layer_on(_MAC);
-    }
-    else {
-      layer_off(_MAC);
-    }
+    activate_host_os(os);
   }
-}
-
-void toggle_mac_layer() {
-  set_mac_layer( ! user_config.is_mac);
 }
 
 void set_rgb_layer_indicators(bool enabled) {

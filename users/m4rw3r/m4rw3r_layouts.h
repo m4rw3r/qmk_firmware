@@ -37,7 +37,7 @@
  * | Ctrl |Hyper | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  * 
- * Using the MAC_ON and MAC_OFF keycodes
+ * Use the KC_MAC keycode to set the OS to MAC.
  */
 
 #define M_TRANSPA     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -102,16 +102,16 @@
  * Standard keyboard-agnostic ADJUST layer row for QWERTY and bottom row for ortho
  *
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      | Reset| Debug|EEPRES|      |MACOFF|MACON |TermOn|TermOff      |      | Del  |
+ * |      | Reset| Debug|EEPRES|OS:Lnx|OS:Win|OS:Mac|      |      |TermOf|TermOn| Del  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |      |      |      |      |      | LEFT | DOWN |  UP  |RIGHT |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |      |      |      |      |      |MPrev | Vol- | Vol+ |MNext |      |Play  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Prev |Bright-Bright+      |
+ * |      |      |      |      |      |             |      | Prev |Brite-|Brite+|      |
  * `-----------------------------------------------------------------------------------'
  */
-#define M_ADJUST_R2 _______, RESET,   DEBUG,   EEP_RST, _______, MAC_OFF, MAC_ON,  TERM_ON, TERM_OFF,_______, _______, KC_DEL
+#define M_ADJUST_R2 _______, RESET,   DEBUG,   EEP_RST, KC_LNX,  KC_WIN,  KC_MAC,  _______, _______,TERM_OFF, TERM_ON, KC_DEL
 #define M_ADJUST_R5 _______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_BRID, KC_BRIU, _______
 
 #endif

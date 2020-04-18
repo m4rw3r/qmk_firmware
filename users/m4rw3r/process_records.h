@@ -11,19 +11,23 @@
 
 enum userspace_custom_keycodes {
   // Userspace toggles
-  KC_MAC_OFF = USERSPACE_SAFE_RANGE,
-  KC_MAC_ON,
+  KC_WIN = USERSPACE_SAFE_RANGE,
+  KC_MAC,
+  KC_LNX,
   KC_RGB_LAYER_INDICATORS,
-  // Swedish codes mapping to alt-codes or compose-sequences
-  KX_AA,
-  KX_AE,
-  KX_OE,
-  KX_EURO,
 };
 
-// Toggles Mac-layout layer
-#define MAC_ON  KC_MAC_ON
-#define MAC_OFF KC_MAC_OFF
+// Unicode characters defined in process_records.c
+enum unicode_names {
+  U_AA,
+  U_AA_UC,
+  U_AE,
+  U_AE_UC,
+  U_OE,
+  U_OE_UC,
+  U_EUR,
+};
+
 #define RGBLAYER KC_RGB_LAYER_INDICATORS
 
 #define GAME    TG(_GAME)
@@ -34,5 +38,11 @@ enum userspace_custom_keycodes {
 #define CTL_ESC LCTL_T(KC_ESC)
 #define BK_LWER LT(_LOWER, KC_BSPC)
 #define SP_LWER LT(_LOWER, KC_SPC)
+
+// Swedish
+#define KX_AA XP(U_AA, U_AA_UC)
+#define KX_AE XP(U_AE, U_AA_UC)
+#define KX_OE XP(U_OE, U_OE_UC)
+#define KX_EURO X(U_EUR)
 
 #endif

@@ -28,10 +28,19 @@ enum userspace_layers {
   _ADJUST
 };
 
+// The OS of the connected computer
+//
+// NOTE: Ensure it fits in the user_config_t field
+typedef enum {
+  OS_WIN = 0,
+  OS_LNX = 1,
+  OS_MAC = 2,
+} HostOS;
+
 typedef union {
   uint32_t raw;
   struct {
-    bool is_mac :1;
+    HostOS host_os :2;
     bool use_rgb_layer_indicators :1;
   };
 } user_config_t;
@@ -83,19 +92,14 @@ void matrix_init_keymap(void);
 void matrix_scan_keymap(void);
 
 /**
- * Sets the Mac layer state and saves the configuration
+ * Sets the Host OS and saves the configuration
  */
-void set_mac_layer(bool enabled);
+void set_host_os(HostOS os);
 
 /**
  * Enables/disables the use of RGB lighting to indicate current layers.
  */
 void set_rgb_layer_indicators(bool enabled);
-
-/**
- * Toggles the Mac layer and saves the configuration
- */
-void toggle_mac_layer(void);
 
 void user_config_save(void);
 
