@@ -14,6 +14,28 @@ const uint32_t PROGMEM unicode_map[] = {
 
 // TODO: default_layer_state_set_user(state)
 
+/**
+ * Taps the given keycode.
+ */
+void tap_keycode(uint16_t keycode) {
+  register_code(keycode);
+  unregister_code(keycode);
+}
+
+/**
+ * If one bit from each of mask1 and mask2 is set in state,
+ * mask3 is applied to state, otherwise mask3 is removed from
+ * state.
+ */
+layer_state_t update_tri_layer_states(
+  layer_state_t state,
+  layer_state_t mask_a,
+  layer_state_t mask_b,
+  layer_state_t mask_c
+) {
+  return (state & mask_a) && (state & mask_b) ? (state | mask_c) : (state & ~mask_c);
+}
+
 layer_state_t layer_state_set_user(layer_state_t state) {
   // Custom version of update_tri_layer_state to allow for deactivation while old state is held
   state = update_tri_layer_states(

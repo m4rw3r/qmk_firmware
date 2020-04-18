@@ -124,28 +124,6 @@ void set_rgb_layer_indicators(bool enabled) {
 }
 
 /**
- * Applies layer mask `mask_c` if both `mask_a` and `mask_b` are matching at
- * least one layer each of the current layers, if at least one of them is not
- * enabled, `mask_c` is removed.
- */
-layer_state_t update_tri_layer_states(
-  layer_state_t state,
-  layer_state_t mask_a,
-  layer_state_t mask_b,
-  layer_state_t mask_c
-) {
-  return (state & mask_a) && (state & mask_b) ? (state | mask_c) : (state & ~mask_c);
-}
-
-/**
- * Taps the given keycode.
- */
-void tap_keycode(uint16_t keycode) {
-  register_code(keycode);
-  unregister_code(keycode);
-}
-
-/**
  * Returns a pointer to a static string containing the name for the currently
  * used layer.
  *

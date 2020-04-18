@@ -104,23 +104,6 @@ void set_rgb_layer_indicators(bool enabled);
 void user_config_save(void);
 
 /**
- * If one bit from each of mask1 and mask2 is set in state,
- * mask3 is applied to state, otherwise mask3 is removed from
- * state.
- */
-layer_state_t update_tri_layer_states(
-  layer_state_t state,
-  layer_state_t mask1,
-  layer_state_t mask2,
-  layer_state_t mask3
-);
-
-/**
- * Taps the given keycode once.
- */
-void tap_keycode(uint16_t keycode);
-
-/**
  * Reads the given layer and returns a user-readable layer name.
  */
 const char *get_layer_state_name(void);
