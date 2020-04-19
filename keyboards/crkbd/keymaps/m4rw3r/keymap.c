@@ -19,20 +19,6 @@ extern rgblight_config_t rgblight_config;
 // TODO: Media controls
 // TODO: Iron out the thumb-clusters
 
-#define LAYOUT_crkbd_base( \
-    K01, K02, K03, K04, K05, K06, K07, K08, K09, K0A, \
-    K11, K12, K13, K14, K15, K16, K17, K18, K19, K1A, K1B, \
-    K21, K22, K23, K24, K25, K26, K27, K28, K29, K2A  \
-  ) \
-  LAYOUT_wrapper( \
-    KC_TAB,  K01, K02, K03, K04, K05,                 K06, K07, K08, K09, K0A, KC_BSPC, \
-    CTL_ESC, K11, K12, K13, K14, K15,                 K16, K17, K18, K19, K1A, K1B, \
-    KC_LSFT, K21, K22, K23, K24, K25,                 K26, K27, K28, K29, K2A, KC_ENT, \
-    THUMB_CLUSTER \
-  )
-
-#define LAYOUT_crkbd_base_wrapper(...) LAYOUT_crkbd_base(__VA_ARGS__)
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_wrapper(\
         M_BASE_R2,\
