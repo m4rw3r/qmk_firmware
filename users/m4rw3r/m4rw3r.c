@@ -46,7 +46,7 @@ void matrix_init_user(void) {
 void activate_host_os(HostOS os) {
   switch(os) {
   case OS_LNX:
-    layer_off(_MAC);
+    layer_on(_MAC);
     set_unicode_input_mode(UC_LNX);
     break;
 

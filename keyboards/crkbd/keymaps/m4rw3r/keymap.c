@@ -16,7 +16,6 @@ extern rgblight_config_t rgblight_config;
 #define THUMB_CLUSTER KC_LALT,  LOWER,  KC_LCTL,      KC_SPACE,  RAISE, KC_LGUI
 
 // TODO: PgUp, PgDown, Home, End
-// TODO: Media controls
 // TODO: Iron out the thumb-clusters
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
