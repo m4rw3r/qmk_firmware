@@ -4,6 +4,7 @@
 #include "quantum.h"
 #include "version.h"
 #include "process_records.h"
+#include "process_unicode.h"
 #include "config_common.h"
 
 // Note: Important to populate all the layers in keymap.c
@@ -95,6 +96,8 @@ void matrix_scan_keymap(void);
  * Sets the Host OS and saves the configuration
  */
 void set_host_os(HostOS os);
+
+HostOS get_host_os(void);
 
 /**
  * Enables/disables the use of RGB lighting to indicate current layers.

@@ -47,17 +47,14 @@ void activate_host_os(HostOS os) {
   switch(os) {
   case OS_LNX:
     layer_on(_MAC);
-    set_unicode_input_mode(UC_LNX);
     break;
 
   case OS_MAC:
     layer_on(_MAC);
-    set_unicode_input_mode(UC_MAC);
     break;
 
   default:
     layer_off(_MAC);
-    set_unicode_input_mode(UC_WIN);
   }
 
   #ifdef AUDIO_ENABLE
@@ -109,6 +106,10 @@ void set_host_os(HostOS os) {
 
     activate_host_os(os);
   }
+}
+
+HostOS get_host_os(void) {
+  return user_config.host_os;
 }
 
 void set_rgb_layer_indicators(bool enabled) {

@@ -10,6 +10,11 @@
 #endif
 
 enum userspace_custom_keycodes {
+  // From unicodemap support in quantum_keycodes.h
+  QK_UNICODEMAP          = 0x8000,
+  QK_UNICODEMAP_MAX      = 0xBFFF,
+  QK_UNICODEMAP_PAIR     = 0xC000,
+  QK_UNICODEMAP_PAIR_MAX = 0xFFFF,
   // Userspace toggles
   KC_WIN = USERSPACE_SAFE_RANGE,
   KC_MAC,
