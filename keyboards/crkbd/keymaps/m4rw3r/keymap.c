@@ -57,8 +57,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_ADJUST] = LAYOUT_wrapper(\
         M_ADJUST_R2,\
-  RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _______,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,  _______, _______, \
-  RGBLAYER,RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, _______,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _______, KC_MPLY, \
+  RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _______,    M_ADJUST_R3_R, \
+  RGBLAYER,RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, _______,    M_ADJUST_R4_R, \
                         _______, _______, _______, _______, _______, _______ \
     ),
 };

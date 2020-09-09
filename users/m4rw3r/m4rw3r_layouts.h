@@ -64,21 +64,23 @@
  * `-----------------------------------------------------------------------------------'
  */
 // We split LOWER into two parts since the _GAME_LOWER layer will use the right side of the lower layer as is
+#define M_LOWER_R1_L    KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5
 #define M_LOWER_R2_L    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
 #define M_LOWER_R3_L    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5
 #define M_LOWER_R4_L    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11
 #define M_LOWER_R5_L    _______, _______, _______, _______, _______, _______
 
+#define M_LOWER_R1_R(b) KC_F6,   KC_F7,   KC_F8,     KC_F9,   KC_F10,  b
 #define M_LOWER_R2_R(b) KC_CIRC, KC_AMPR, KC_ASTR,   KC_LPRN, KC_RPRN, b
 #define M_LOWER_R3_R    KC_F6,   KC_UNDS, KC_PLUS,   KC_LCBR, KC_RCBR, KC_PIPE
 #define M_LOWER_R4_R    KC_F12,S(KC_NUHS),S(KC_NUBS),KC_PSCR, _______, _______
 #define M_LOWER_R5_R    _______, _______, KC_MNXT,   KC_VOLD, KC_VOLU, KC_MPLY
 
+#define M_LOWER_R1 M_LOWER_R1_L, M_LOWER_R1_R(_______)
 #define M_LOWER_R2 M_LOWER_R2_L, M_LOWER_R2_R(_______)
 #define M_LOWER_R3 M_LOWER_R3_L, M_LOWER_R3_R
 #define M_LOWER_R4 M_LOWER_R4_L, M_LOWER_R4_R
 #define M_LOWER_R5 M_LOWER_R5_L, M_LOWER_R5_R
-#define M_LOWER_R1 M_LOWER_R2
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
@@ -104,14 +106,16 @@
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      | Reset| Debug|EEPRES|OS:Lnx|OS:Win|OS:Mac|      |      |TermOf|TermOn| Del  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      | LEFT | DOWN |  UP  |RIGHT |      |      |
+ * |      |      |      |      |      |      | Left | Down |  Up  |Right | Vol+ | Next |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |MPrev | Vol- | Vol+ |MNext |      |Play  |
+ * |      |      |      |      |      |      | Home | PgDn | PgUp | End  | Vol- | Play |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Prev |Brite-|Brite+|      |
  * `-----------------------------------------------------------------------------------'
  */
 #define M_ADJUST_R2 _______, RESET,   DEBUG,   EEP_RST, KC_LNX,  KC_WIN,  KC_MAC,  _______, _______,TERM_OFF, TERM_ON, KC_DEL
+#define M_ADJUST_R3_R KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_VOLU, KC_MNXT
+#define M_ADJUST_R4_R KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLD, KC_MPLY
 #define M_ADJUST_R5 _______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_BRID, KC_BRIU, _______
 
 #endif

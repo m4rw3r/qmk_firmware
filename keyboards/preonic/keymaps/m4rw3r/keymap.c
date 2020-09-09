@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * * Moved Home, Page Down, Page Up, and End to this layer on arrow keys
  */
 [_GAME_LOWER] = LAYOUT_preonic_grid_wrapper( \
-  KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11, \
+  M_LOWER_R1_L, M_LOWER_R1_R(KC_F11), \
   _______, _______, _______, _______, _______, _______, M_LOWER_R2_R(KC_F12), \
   _______, _______, _______, _______, _______, _______, M_LOWER_R3_R, \
   _______, _______, _______, _______, _______, _______, M_LOWER_R4_R, \
@@ -42,11 +42,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | Reset|      |      |      |MacOff|MacOn |      |      |      |      |  Del |
+ * |      | Reset| Debug|EEPRES|OS:Lnx|OS:Win|OS:Mac|      |      |TermOf|TermOn|  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |      |      |Aud on|AudOff|      | Left | Down |  Up  |Right |      |      |
+ * |      |      |      |Aud on|AudOff|      | Left | Down |  Up  |Right | Vol+ | Next |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |Voice-|Voice+|Mus on|MusOff|MidiOn|MidOff|      |      |      |      |      |
+ * |      |      | GAME |      |      |      | Home | PgDn | PgUp | End  | Vol- | Play |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Prev |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -54,8 +54,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_preonic_grid_wrapper( \
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
   M_ADJUST_R2, \
-  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______, \
-  _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  _______, _______, GAME,    _______, _______, _______, _______, \
+  _______, _______, _______, AU_ON,   AU_OFF,  _______, M_ADJUST_R3_R, \
+  _______, _______, GAME,    _______, _______, _______, M_ADJUST_R4_R, \
   M_ADJUST_R5 \
 )
 };

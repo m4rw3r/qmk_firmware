@@ -32,8 +32,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = LAYOUT_planck_grid_wrapper(M_RAISE_R2, M_RAISE_R3, M_RAISE_R4, M_RAISE_R5),
 [_ADJUST] = LAYOUT_planck_grid_wrapper(
   M_ADJUST_R2,
-  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  _______, KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT, _______, _______,
-  _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  _______, KC_MPRV, KC_VOLD, KC_VOLU,  KC_MNXT, _______, KC_MPLY,
+  _______, _______, _______, AU_ON,   AU_OFF,  _______, M_ADJUST_R3_R, \
+  _______, _______, _______, _______, _______, _______, M_ADJUST_R4_R, \
   M_ADJUST_R5
 )
 };
