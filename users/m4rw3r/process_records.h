@@ -46,7 +46,7 @@ enum unicode_names {
 
 // Swedish
 #define KX_AA XP(U_AA, U_AA_UC)
-#define KX_AE XP(U_AE, U_AA_UC)
+#define KX_AE XP(U_AE, U_AE_UC)
 #define KX_OE XP(U_OE, U_OE_UC)
 #define KX_EURO X(U_EUR)
 
