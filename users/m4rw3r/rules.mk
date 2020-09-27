@@ -25,4 +25,4 @@ ifeq ($(strip $(RGBLIGHT_ENABLE)), yes)
 endif
 
 # LTO to optimize away unused stuff
-LINK_TIME_OPTIMIZATION_ENABLE = yes
+LTO_ENABLE = yes
