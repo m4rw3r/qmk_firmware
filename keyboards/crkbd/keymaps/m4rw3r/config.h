@@ -2,13 +2,10 @@
 
 #define MASTER_LEFT
 
-// #undef USE_I2C
-
-#define SSD1306OLED
+#undef USE_I2C
+#undef SSD1306OLED
 
 #define USE_SERIAL_PD2
-
-// #define OLED_DISABLE_TIMEOUT
 
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM
