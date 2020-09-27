@@ -42,6 +42,19 @@ Right (slave) side:
 make crkbd:m4rw3r:dfu RGB_MATRIX_SPLIT=yes
 ```
 
+## Updating
+
+```bash
+git fetch upstream
+git checkout master
+git merge upstream/master
+git push && git push --tags
+git checkout m4rw3r
+git rebase master
+docker rmi qmkfm/base_container
+make git-submodule
+```
+
 ## Gentoo
 
 So far I have gotten a working compiler but the binaries it produces just freeze the keyboard with a single note playing. Probably need specific versions of newlib
