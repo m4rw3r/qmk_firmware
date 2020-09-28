@@ -66,7 +66,7 @@ void activate_host_os(HostOS os) {
 void keyboard_post_init_user(void) {
   user_config.raw = eeconfig_read_user();
 
-  activate_host_os(user_config.host_os);
+  activate_host_os(user_config.data.host_os);
 
   #ifdef RGBLIGHT_ENABLE
   layer_state_set_rgb(layer_state);
@@ -82,7 +82,7 @@ void user_config_save(void) {
 // Contains default configuration for when EEPROM is reset
 void eeconfig_init_user(void) {
   user_config.raw = 0;
-  user_config.use_rgb_layer_indicators = true;
+  user_config.data.use_rgb_layer_indicators = true;
 
   user_config_save();
 
@@ -99,8 +99,8 @@ void matrix_scan_user(void) {
 
 void set_host_os(HostOS os) {
   // Only update if different, saves EEPROM
-  if(user_config.host_os != os) {
-    user_config.host_os = os;
+  if(user_config.data.host_os != os) {
+    user_config.data.host_os = os;
 
     user_config_save();
 
@@ -109,18 +109,18 @@ void set_host_os(HostOS os) {
 }
 
 HostOS get_host_os(void) {
-  return user_config.host_os;
+  return user_config.data.host_os;
 }
 
 void set_rgb_layer_indicators(bool enabled) {
   // Only update if different, saves EEPROM
-  if(user_config.use_rgb_layer_indicators != enabled) {
-    user_config.use_rgb_layer_indicators = enabled;
+  if(user_config.data.use_rgb_layer_indicators != enabled) {
+    user_config.data.use_rgb_layer_indicators = enabled;
 
     user_config_save();
 
     #ifdef RGBLIGHT_ENABLE
-    if(user_config.use_rgb_layer_indicators) {
+    if(user_config.data.use_rgb_layer_indicators) {
       rgblight_enable();
       layer_state_set_rgb(layer_state);
     }

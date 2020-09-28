@@ -35,7 +35,7 @@ typedef union {
   struct {
     HostOS host_os :2;
     bool use_rgb_layer_indicators :1;
-  };
+  } data;
 } user_config_t;
 
 #define LAYER_MASK(layer) (1UL << (layer))
