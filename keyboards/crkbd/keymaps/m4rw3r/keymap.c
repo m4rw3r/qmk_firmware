@@ -13,7 +13,7 @@ extern rgblight_config_t rgblight_config;
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
 // TODO: Drop CTRL on CRKBD to allow for a VIM-layer?
-#define THUMB_CLUSTER KC_LALT,  LOWER,  KC_LCTL,      KC_SPACE,  RAISE, KC_LGUI
+#define THUMB_CLUSTER KC_LCTL,  LOWER,  KC_LGUI,      KC_SPACE,  RAISE, KC_LALT
 
 // TODO: PgUp, PgDown, Home, End
 // TODO: Iron out the thumb-clusters
