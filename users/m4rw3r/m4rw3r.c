@@ -137,9 +137,8 @@ void set_rgb_layer_indicators(bool enabled) {
 const char *get_layer_state_name(void) {
   switch(biton32(layer_state)) {
   case _BASE:
-    return "Default";
   case _MAC:
-    return "Mac";
+    return "Default";
   // Temporary layers
   case _GAME:
     return "Game";
@@ -158,5 +157,18 @@ const char *get_layer_state_name(void) {
     break;
   default:
     return "Unknown";
+  }
+}
+
+const char *get_os_name(void) {
+  switch(user_config.data.host_os) {
+  case OS_LNX:
+    return "Linux";
+
+  case OS_MAC:
+    return "Mac";
+
+  default:
+    return "Windows";
   }
 }

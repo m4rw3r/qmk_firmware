@@ -111,4 +111,9 @@ void user_config_save(void);
  */
 const char *get_layer_state_name(void);
 
+/**
+ * Returns the current OS name.
+ */
+const char *get_os_name(void);
+
 #endif
