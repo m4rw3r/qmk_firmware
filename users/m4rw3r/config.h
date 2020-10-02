@@ -7,6 +7,8 @@
 // Speed up unicode input
 #define UNICODE_TYPE_DELAY 0
 
+#define OLED_TIMEOUT 10000
+
 // Global audio configuration
 #ifdef AUDIO_ENABLE
   #define STARTUP_SONG SONG(PREONIC_SOUND)
