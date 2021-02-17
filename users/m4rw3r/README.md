@@ -30,16 +30,10 @@ make niu_mini:m4rw3r:dfu
 
 #### Crkbd
 
-Left side:
+It now autodetects which side is correct (left side is with USB):
 
 ```
 make crkbd:m4rw3r:dfu
-```
-
-Right (slave) side:
-
-```
-make crkbd:m4rw3r:dfu RGB_MATRIX_SPLIT=yes
 ```
 
 ## Updating
