@@ -113,9 +113,10 @@
  * |      |      |      |      |      |             |      | Prev |Brite-|Brite+|      |
  * `-----------------------------------------------------------------------------------'
  */
-#define M_ADJUST_R2 _______, RESET,   DEBUG,   EEP_RST, KC_LNX,  KC_WIN,  KC_MAC,  _______, _______,TERM_OFF, TERM_ON, KC_DEL
+#define M_ADJUST_R2   _______, RESET,   DEBUG,   EEP_RST, KC_LNX,  KC_WIN,  KC_MAC,  _______, _______,TERM_OFF, TERM_ON, KC_DEL
 #define M_ADJUST_R3_R KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_VOLU, KC_MNXT
 #define M_ADJUST_R4_R KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLD, KC_MPLY
-#define M_ADJUST_R5 _______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_BRID, KC_BRIU, _______
+#define M_ADJUST_R5_R _______, _______, KC_MPRV, KC_BRID, KC_BRIU, _______
+#define M_ADJUST_R5   _______, _______, _______, _______, _______, _______, M_ADJUST_R5_R
 
 #endif
