@@ -29,7 +29,7 @@ void layer_state_set_rgb(layer_state_t state) {
     base_hue  = rgblight_get_hue();
   }
 
-  if( ! user_config.use_rgb_layer_indicators) {
+  if( ! user_config.data.use_rgb_layer_indicators) {
     return;
   }
 

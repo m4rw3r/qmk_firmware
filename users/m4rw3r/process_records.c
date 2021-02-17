@@ -86,7 +86,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   case KC_RGB_LAYER_INDICATORS:
     if(record->event.pressed) {
-      set_rgb_layer_indicators(true);
+      set_rgb_layer_indicators(!user_config.data.use_rgb_layer_indicators);
     }
 
     return false;
