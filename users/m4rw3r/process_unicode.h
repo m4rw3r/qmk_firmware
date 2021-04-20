@@ -22,9 +22,6 @@
 #    define UNICODE_TYPE_DELAY 10
 #endif
 
-#define X(i) (QK_UNICODEMAP | (i))
-#define XP(i, j) (QK_UNICODEMAP_PAIR | ((i)&0x7F) | (((j)&0x7F) << 7))  // 127 max i and j
-
 extern const uint32_t PROGMEM unicode_map[];
 
 uint16_t unicodemap_index(uint16_t keycode);

@@ -88,11 +88,11 @@ void register_hex32(uint32_t hex) {
 
     if(digit == 0) {
       if(!onzerostart) {
-        tap_code(hex_to_keycode(digit));
+        send_nibble(digit);
       }
     }
     else {
-      tap_code(hex_to_keycode(digit));
+      send_nibble(digit);
       onzerostart = false;
     }
   }
