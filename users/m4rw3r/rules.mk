@@ -2,7 +2,6 @@ SRC += m4rw3r.c \
        process_records.c \
        process_unicode.c
 
-BACKLIGHT_ENABLE = no
 BOOTMAGIC_ENABLE = lite
 CONSOLE_ENABLE = no
 MOUSEKEY_ENABLE = no

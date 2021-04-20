@@ -3,37 +3,24 @@ Reusable stuff for ortho layout
 ### Building
 
 ```bash
-make -j16 --output-sync preonic/rev3:m4rw3r planck/rev6:m4rw3r niu_mini:m4rw3r crkbd:m4rw3r
+# To build all layouts:
+./util/docker_build.sh :m4rw3r
+# For specific layouts:
+./util/docker_build.sh preonic/rev3:m4rw3r
+./util/docker_build.sh planck/rev6:m4rw3r
+./util/docker_build.sh niu_mini:m4rw3r
+./util/docker_build.sh crkbd:m4rw3r
+./util/docker_build.sh eyeohdesigns/babyv:m4rw3r
 ```
 
 ### Flashing
 
-If flashing from docker ensure to use `sudo ./util/docker_build.sh planck/rev6:foo:dfu-util`.
-
-#### Preonic
-
 ```bash
-make preonic/rev3:m4rw3r:dfu-util
-```
-
-#### Planck
-
-```bash
-make planck/rev6:m4rw3r:dfu-util
-```
-
-#### NIU Mini
-
-```bash
-make niu_mini:m4rw3r:dfu
-```
-
-#### Crkbd
-
-It now autodetects which side is correct (left side is with USB):
-
-```
-make crkbd:m4rw3r:dfu
+sudo ./util/docker_build.sh preonic/rev3:m4rw3r:dfu-util
+sudo ./util/docker_build.sh planck/rev6:m4rw3r:dfu-util
+sudo ./util/docker_build.sh niu_mini:m4rw3r:dfu
+sudo ./util/docker_build.sh crkbd:m4rw3r:dfu
+sudo ./util/docker_build.sh eyeohdesigns/babyv:m4rw3r:flash
 ```
 
 ## Updating
@@ -41,7 +28,7 @@ make crkbd:m4rw3r:dfu
 ```bash
 git fetch upstream
 git checkout master
-git merge upstream/master
+git merge --ff-only upstream/master
 git push && git push --tags
 git checkout m4rw3r
 git rebase master
